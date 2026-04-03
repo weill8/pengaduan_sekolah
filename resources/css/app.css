@@ -1,0 +1,26 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+     /* Font families */
+  --font-sans: 'DM Sans', sans-serif;
+  --font-display: 'Syne', sans-serif;
+
+  /* Custom animation */
+  --animate-float: float 8s ease-in-out infinite;
+
+  /* Keyframes */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) scale(1);
+    }
+    50% {
+      transform: translateY(-30px) scale(1.05);
+    }
+  }
+
+}
