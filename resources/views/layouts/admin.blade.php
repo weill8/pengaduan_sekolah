@@ -363,41 +363,8 @@
         </aside>
 
         {{-- Main Content --}}
-        <main class="flex-1 ml-0 md:ml-64 p-6 overflow-x-auto">
-            {{-- @if (session('success'))
-                <div
-                    class="mb-6 flex items-center gap-3 bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 text-emerald-700 px-5 py-4 rounded-2xl shadow-sm">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center flex-shrink-0">
-                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="font-semibold text-sm">Berhasil!</p>
-                        <p class="text-sm">{{ session('success') }}</p>
-                    </div>
-                </div>
-            @endif
-
-            @if (session('error'))
-                <div
-                    class="mb-6 flex items-center gap-3 bg-gradient-to-r from-red-50 to-rose-50 border border-red-200 text-red-700 px-5 py-4 rounded-2xl shadow-sm">
-                    <div class="w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center flex-shrink-0">
-                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="font-semibold text-sm">Terjadi Kesalahan</p>
-                        <p class="text-sm">{{ session('error') }}</p>
-                    </div>
-                </div>
-            @endif --}}
-
+        <main class="flex-1 ml-0 md:ml-64 p-6 overflow-x-auto ">
+       
             {{-- Page Content --}}
             <div
                 class="bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl shadow-slate-200/40 border border-white/50 p-6 lg:p-8 mb-16 lg:mb-0 md:mb-0">

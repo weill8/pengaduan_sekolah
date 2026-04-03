@@ -54,6 +54,7 @@ class SiswaAuthController extends Controller
     {
         $siswa = Siswa::create([
             'nis'      => $request->nis,
+            'nama'     => $request->nama,
             'id_kelas' => $request->id_kelas,
             'password' => Hash::make($request->password),
         ]);

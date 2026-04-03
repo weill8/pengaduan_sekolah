@@ -98,12 +98,12 @@
                 <div class="flex items-center gap-3 hover:bg-slate-50 py-1.5 px-2 rounded-lg border border-transparent hover:border-slate-200 transition-all">
                     <div class="text-right">
                         <p class="text-sm font-semibold text-slate-700 leading-none">
-                            {{ Auth::guard('siswa')->user()->nis }}
+                            {{ Auth::guard('siswa')->user()->nama }}
                         </p>
-                        <p class="text-xs text-slate-500 mt-0.5">Siswa</p>
+                        <p class="text-xs text-slate-500 mt-0.5">{{ Auth::guard('siswa')->user()->nis }}</p>
                     </div>
                     <div class="h-9 w-9 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-500 flex items-center justify-center text-white font-bold shadow-md ring-2 ring-white">
-                        {{ strtoupper(substr(Auth::guard('siswa')->user()->nis, 0, 1)) }}
+                        {{ strtoupper(substr(Auth::guard('siswa')->user()->nama, 0, 1)) }}
                     </div>
                 </div>
             </div>

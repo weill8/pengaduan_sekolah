@@ -25,6 +25,7 @@ class SiswaRegisterRequest extends FormRequest
         return [
             'nis'      => ['required', 'numeric', 'unique:tb_siswa,nis'],
             'id_kelas' => ['required', 'exists:tb_kelas,id'],
+            'nama'     => ['required', 'string', 'max:100'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ];
     }
@@ -37,6 +38,9 @@ class SiswaRegisterRequest extends FormRequest
             'nis.unique'        => 'NIS sudah terdaftar.',
             'id_kelas.required' => 'Kelas wajib dipilih.',
             'id_kelas.exists'   => 'Kelas tidak ditemukan.',
+            'nama.required'     => 'Nama wajib diisi.',
+            'nama.string'       => 'Nama harus berupa teks.',
+            'nama.max'          => 'Nama maksimal 100 karakter.',
             'password.required' => 'Password wajib diisi.',
             'password.min'      => 'Password minimal 6 karakter.',
             'password.confirmed' => 'Konfirmasi password tidak cocok.',

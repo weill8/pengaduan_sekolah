@@ -64,14 +64,13 @@
 
                 {{-- Filter Siswa --}}
                 <div>
-                    <label for="nis" class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Siswa
-                        (NIS)</label>
-                    <input list="listNis" id="nis" name="nis" value="{{ request('nis') }}"
-                        placeholder="Cari NIS..."
+                    <label for="nis" class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Nama Siswa / NIS</label>
+                    <input list="listNis" id="nis" name="search" value="{{ request('search') }}"
+                        placeholder="Cari Nama / NIS..."
                         class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-400 transition-all">
                     <datalist id="listNis">
                         @foreach ($siswas as $siswa)
-                            <option value="{{ $siswa->nis }}">
+                            <option value="{{ $siswa->nama }}">
                                 {{ $siswa->nis }} — {{ $siswa->kelas->nama_kelas ?? '-' }}
                             </option>
                         @endforeach
@@ -138,7 +137,7 @@
                         <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-center w-16">
                             No</th>
                         <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">Tanggal</th>
-                        <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">Siswa (NIS)</th>
+                        <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">Siswa</th>
                         <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">Kelas</th>
                         <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">Kategori</th>
                         <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">Lokasi</th>
@@ -183,7 +182,7 @@
                             <td class="px-6 py-4">
                                 <span
                                     class="font-mono text-xs font-semibold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-md">
-                                    {{ $item->nis }}
+                                    {{ $item->siswa?->nama ?? '-' }}
                                 </span>
                             </td>
                             <td class="px-2 py-4">

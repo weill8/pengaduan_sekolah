@@ -31,11 +31,12 @@ class AspirasiController extends Controller
                 ->whereMonth('created_at', $bulan);
         }
 
-        // Filter per siswa (NIS)
-        if ($request->filled('nis')) {
+        // Filter per siswa (NIS) atau nama
+        if ($request->filled('search')) {
             $query->whereHas('siswa', function ($q) use ($request) {
-                $q->where('nis', 'like', '%' . $request->nis . '%');
-            });;
+                $q->where('nis', 'like', '%' . $request->search . '%')
+                    ->orWhere('nama', 'like', '%' . $request->search . '%');
+            });
         }
 
         // Filter per kategori
@@ -114,8 +115,9 @@ class AspirasiController extends Controller
         }
 
         // Cari berdasarkan NIS
-        if ($request->filled('cari')) {
-            $query->where('nis', 'like', '%' . $request->cari . '%');
+        if ($request->filled('search')) {
+            $query->where('nis', 'like', '%' . $request->search . '%')
+                ->orWhere('nama', 'like', '%' . $request->search . '%');
         }
 
         $siswas  = $query->paginate(15)->withQueryString();
@@ -158,12 +160,12 @@ class AspirasiController extends Controller
                 ->where(fn($q) => $q
                     ->whereHas('aspirasi', fn($q2) => $q2->where('status', 'menunggu'))
                     ->orWhereDoesntHave('aspirasi'))
-                    ->count(),
+                ->count(),
 
             'proses' => InputAspirasi::where('nis', $siswa->nis)
-                    ->whereHas('aspirasi', fn($q) => $q->where('status', 'proses'))
-                    ->count(),
-                    
+                ->whereHas('aspirasi', fn($q) => $q->where('status', 'proses'))
+                ->count(),
+
             'selesai' => InputAspirasi::where('nis', $siswa->nis)
                 ->whereHas('aspirasi', fn($q) => $q->where('status', 'selesai'))
                 ->count(),

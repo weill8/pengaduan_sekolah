@@ -23,7 +23,7 @@
                 <div class="w-1 h-6 rounded-full bg-gradient-to-b from-indigo-500 to-violet-600"></div>
                 <h1 class="text-xl font-bold text-slate-800 tracking-tight">
                     Detail Aspirasi
-                    <span class="text-slate-400 font-normal">#{{ $aspirasi->siswa->nis ?? '-' }}</span>
+                    <span class="text-slate-400 font-normal"> — {{ $aspirasi->siswa->nama ?? '-' }}</span>
                 </h1>
             </div>
             <p class="text-sm text-slate-400 ml-3">

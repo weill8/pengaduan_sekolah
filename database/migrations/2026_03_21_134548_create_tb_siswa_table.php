@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tb_siswa', function (Blueprint $table) {
             $table->unsignedBigInteger('nis')->primary();
+            $table->string('nama', 100);
             $table->foreignId('id_kelas')->constrained('tb_kelas')->cascadeOnDelete();
             $table->string('password', 100);
             $table->rememberToken();

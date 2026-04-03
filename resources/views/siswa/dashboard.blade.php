@@ -18,7 +18,7 @@
             <div>
                 <p class="text-white text-sm font-medium mb-1">Selamat datang kembali 👋</p>
                 <h1 class="text-2xl font-bold text-white tracking-tight">
-                    Siswa — {{ $siswa->nis }}
+                    {{ $siswa->nama }} — {{ $siswa->nis }}
                 </h1>
                 <p class="text-white text-sm mt-1">
                     {{ $siswa->kelas?->nama_kelas ?? '-' }} &nbsp;·&nbsp;
@@ -165,7 +165,7 @@
                         </svg>
                     </div>
                     <div class="min-w-0">
-                        <p class="text-sm font-semibold text-slate-700 truncate">{{ $laporan->ket }}</p>
+                        <p class="text-sm font-semibold text-slate-700 whitespace-pre-line wrap-break-word">{{ $laporan->ket }}</p>
                         <div class="flex items-center gap-2 mt-1 flex-wrap">
                             <span class="text-xs text-slate-400">{{ $laporan->kategori?->ket_kategori ?? '-' }}</span>
                             <span class="text-slate-200">·</span>

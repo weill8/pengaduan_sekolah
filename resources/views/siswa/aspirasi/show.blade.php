@@ -23,7 +23,7 @@
                     <div class="w-1 h-6 rounded-full bg-gradient-to-b from-emerald-500 to-teal-600"></div>
                     <h1
                         class="text-xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                        Detail Aspirasi Anda
+                        Detail Aspirasi {{ Auth::guard('siswa')->user()->nama }}
                     </h1>
                 </div>
                 <p class="text-sm text-slate-500 ml-3">

@@ -20,20 +20,20 @@
                 <div class="w-1 h-6 rounded-full bg-gradient-to-b from-indigo-500 to-violet-600"></div>
                 <h1 class="text-xl font-bold text-slate-800 tracking-tight">Histori Aspirasi</h1>
             </div>
-            <p class="text-sm text-slate-400 ml-3">Riwayat aspirasi siswa <span
-                    class="font-mono font-semibold text-slate-600">{{ $siswa->nis }}</span> —
-                {{ $siswa->kelas?->nama_kelas ?? '-' }}</p>
+            <p class="text-sm text-slate-400 ml-3">
+                Riwayat aspirasi {{ $siswa->nama }}  — {{ $siswa->kelas?->nama_kelas ?? '-' }}
+            </p>
         </div>
 
         {{-- Avatar Siswa --}}
         <div class="flex items-center gap-3 bg-white rounded-xl border border-slate-100 px-4 py-2.5 shadow-sm">
             <div
                 class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-100 to-violet-100 flex items-center justify-center flex-shrink-0">
-                <span class="text-sm font-bold text-indigo-700">{{ mb_substr((string) $siswa->nis, -2) }}</span>
+                <span class="text-sm font-bold text-indigo-700">{{ strtoupper(substr($siswa->nama, 0 , 1)) }}</span>
             </div>
             <div class="hidden sm:block">
-                <p class="text-xs font-semibold text-slate-600">Siswa</p>
-                <p class="text-xs text-slate-400">NIS {{ $siswa->nis }}</p>
+                <p class="text-xs font-semibold text-slate-600">{{ $siswa->nama }}</p>
+                <p class="text-xs text-slate-400">NIS: <span class="px-1 bg-gray-100 rounded-sm text-slate-600">{{ $siswa->nis }}</span></p>
             </div>
         </div>
     </div>
@@ -195,7 +195,7 @@
                         </div>
                         <div>
                             <div class="flex items-center gap-2">
-                                <span class="text-xs font-mono text-slate-400">#{{ $item->id_pelaporan }}</span>
+                                <span class="text-xs font-mono text-slate-400"># {{ $loop->iteration }}</span>
                                 <span class="text-slate-300">•</span>
                                 <span class="text-xs text-slate-500 inline-flex items-center gap-1">
                                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"

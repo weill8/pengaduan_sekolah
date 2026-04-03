@@ -150,7 +150,7 @@
             <thead>
                 <tr class="bg-gray-50/60">
                     <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-400">Keterangan</th>
-                    <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-400">Pelapor (NIS)</th>
+                    <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-400">Pelapor</th>
                     <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-400">Kategori</th>
                     <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-400">Lokasi</th>
                     <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-400">Tanggal</th>
@@ -176,9 +176,9 @@
                         <td class="px-6 py-4">
                             <div class="flex items-center gap-2.5">
                                 <div class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-xs font-bold text-indigo-700">
-                                    {{ substr($report->nis, -2) }}
+                                    {{ strtoupper(substr($report->siswa?->nama, 0, 1)) }}
                                 </div>
-                                <span class="text-sm text-gray-700">{{ $report->nis }}</span>
+                                <span class="text-sm text-gray-700">{{ $report->siswa?->nama }}</span>
                             </div>
                         </td>
 

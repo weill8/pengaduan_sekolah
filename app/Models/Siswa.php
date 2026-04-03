@@ -18,6 +18,7 @@ class Siswa extends Authenticatable
 
     protected $fillable = [
         'nis',
+        'nama',
         'id_kelas',
         'password',
     ];

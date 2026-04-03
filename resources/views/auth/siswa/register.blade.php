@@ -216,39 +216,76 @@
                     @enderror
                 </div>
 
-                {{-- Class Select Field --}}
-                <div class="mb-5 fade-in" style="animation-delay: 0.3s">
-                    <label for="id_kelas" class="block text-sm font-medium text-slate-700 mb-2">Kelas</label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                            <svg class="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                            </svg>
+                <div class="flex justify-between items-center gap-2 fade-in" style="animation-delay: 0.3s">
+
+                    {{-- Nama Field --}}
+                    <div class="mb-5 fade-in">
+                        <div class="flex justify-between items-center mb-2 text-sm font-medium text-slate-700">
+                            <label for="nis" class="">Nama</label>
+                            <span class="mr-2 font-mono"><span id="char-count" class="font-bold">0</span>/100</span>
                         </div>
-                        <select id="id_kelas" name="id_kelas"
-                            class="input-field select-field w-full pl-11 pr-10 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-sm cursor-pointer"
-                            required>
-                            <option value="">-- Pilih Kelas --</option>
-                            @foreach ($kelasList as $kelas)
-                                <option value="{{ $kelas->id }}"
-                                    {{ old('id_kelas') == $kelas->id ? 'selected' : '' }}>
-                                    {{ $kelas->nama_kelas }}
-                                </option>
-                            @endforeach
-                        </select>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                                <svg class="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+                                </svg>
+                            </div>
+                            <input type="text" pattern="[A-Za-z\s]+" title="Hanya Boleh Huruf" maxlength="100"
+                                id="nama" name="nama" value="{{ old('nama') }}"
+                                placeholder="Masukkan Nama"
+                                class="input-field w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 placeholder-slate-400 text-sm"
+                                required autofocus>
+                        </div>
+
+                        @error('nama')
+                            <p class="mt-2 text-xs text-red-600 flex items-center gap-1">
+                                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                {{ $message }}
+                            </p>
+                        @enderror
                     </div>
-                    @error('id_kelas')
-                        <p class="mt-2 text-xs text-red-600 flex items-center gap-1">
-                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd"
-                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            {{ $message }}
-                        </p>
-                    @enderror
+
+                    {{-- Class Select Field --}}
+                    <div class="mb-5 fade-in">
+                        <label for="id_kelas" class="block text-sm font-medium text-slate-700 mb-2">Kelas</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                                <svg class="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                </svg>
+                            </div>
+                            <select id="id_kelas" name="id_kelas"
+                                class="input-field select-field w-full pl-11 pr-10 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-sm cursor-pointer"
+                                required>
+                                <option value="">Daftar Kelas</option>
+                                @foreach ($kelasList as $kelas)
+                                    <option value="{{ $kelas->id }}"
+                                        {{ old('id_kelas') == $kelas->id ? 'selected' : '' }}>
+                                        {{ $kelas->nama_kelas }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @error('id_kelas')
+                            <p class="mt-2 text-xs text-red-600 flex items-center gap-1">
+                                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+
                 </div>
 
                 {{-- Password Field --}}
@@ -263,7 +300,7 @@
                             </svg>
                         </div>
                         <input :type="showPassword ? 'text' : 'password'" id="password" name="password"
-                            placeholder="Masukkan password"
+                            placeholder="(min. 6 karakter)"
                             class="input-field w-full pl-11 pr-12 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 placeholder-slate-400 text-sm"
                             required>
                         {{-- Eye Toggle Button --}}
@@ -372,6 +409,20 @@
         </div>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputNama = document.getElementById('nama');
+            const counter = document.getElementById('char-count');
+            if (inputNama && counter) {
+                inputNama.addEventListener('input', function() {
+                    counter.textContent = this.value.length;
+                    counter.classList.toggle('text-amber-600', this.value.length > 50);
+                    counter.classList.toggle('text-red-600', this.value.length >= 95);
+                });
+                counter.textContent = inputNama.value.length;
+            }
+        });
+    </script>
 </body>
 
 </html>

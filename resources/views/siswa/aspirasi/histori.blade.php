@@ -76,7 +76,7 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4">
-                                <span class="text-sm text-slate-600 truncate block max-w-[150px]" title="{{ $item->lokasi }}">{{ $item->lokasi }}</span>
+                                <span class="text-sm text-slate-600 truncate max-w-[150px]" title="{{ $item->lokasi }}">{{ $item->lokasi }}</span>
                             </td>
                             <td class="px-6 py-4">
                                 <span class="inline-flex items-center gap-1.5 text-xs text-slate-500">
