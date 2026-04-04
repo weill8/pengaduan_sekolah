@@ -6,6 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>AspirasiKu — Suara Siswa, Masa Depan Lebih Baik</title>
+    
+    {{-- Primary Meta --}}
+    <meta name="description" content="AspirasiKu adalah platform aspirasi siswa untuk menyampaikan suara, ide, dan harapan demi masa depan pendidikan yang lebih baik.">
+    <meta name="keywords" content="aspirasi siswa, suara siswa, pendidikan, masa depan, sekolah">
+    <meta name="author" content="Weillsun">
+
+    {{-- Open Graph --}}
+    <meta property="og:title" content="AspirasiKu — Suara Siswa, Masa Depan Lebih Baik">
+    <meta property="og:description" content="Platform aspirasi siswa untuk menyampaikan suara, ide, dan harapan demi masa depan pendidikan yang lebih baik.">
+    <meta property="og:image" content="{{ asset('images/og-image.jpg') }}">
+    <meta property="og:url" content="{{ url('/') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AspirasiKu">
+    <meta property="og:locale" content="id_ID">
+
+    {{-- Twitter/X Card --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AspirasiKu — Suara Siswa, Masa Depan Lebih Baik">
+    <meta name="twitter:description" content="Platform aspirasi siswa untuk menyampaikan suara, ide, dan harapan demi masa depan pendidikan yang lebih baik.">
+    <meta name="twitter:image" content="{{ asset('images/og-image.jpg') }}">
+
+    {{-- Favicon --}}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
 
     <!-- Alpine.js -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -238,7 +265,8 @@
             <a href="#fitur" @click="mobileOpen = false" class="py-2 text-sm font-medium text-slate-700">Fitur</a>
             <a href="#cara-kerja" @click="mobileOpen = false" class="py-2 text-sm font-medium text-slate-700">Cara
                 Kerja</a>
-            <a href="#statistik" @click="mobileOpen = false" class="py-2 text-sm font-medium text-slate-700">Dampak</a>
+            <a href="#statistik" @click="mobileOpen = false"
+                class="py-2 text-sm font-medium text-slate-700">Dampak</a>
             @auth('admin')
                 <div class="border-t border-slate-200 pt-4">
                     <a href="{{ route('admin.dashboard') }}"
@@ -627,8 +655,8 @@
                                 <div class="flex-1 min-w-0">
                                     <p class="text-xs font-semibold text-slate-700">Kantin Lebih Sehat</p>
                                     <div class="flex">
-                                    <p class="text-[10px] text-slate-400 mt-0.5">Kesehatan &nbsp;·&nbsp;</p>
-                                    <p class="text-[10px] text-slate-400 mt-0.5 flex gap-1 items-center">
+                                        <p class="text-[10px] text-slate-400 mt-0.5">Kesehatan &nbsp;·&nbsp;</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5 flex gap-1 items-center">
                                             <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24"
                                                 stroke="currentColor" stroke-width="2">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -639,7 +667,7 @@
                                             Kantin
                                             &nbsp;·&nbsp;
                                         </p>
-                                    <p class="text-[10px] text-slate-400 mt-0.5">10 Mar 2025</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">10 Mar 2025</p>
                                     </div>
 
                                     <p class="mt-1.5 text-[10px] w-fit">
@@ -818,142 +846,172 @@
 
 
     {{-- ===================== STATISTIK / CTA SECTION ===================== --}}
-<section id="statistik" class="py-20 border-t border-slate-200/80 bg-white">
-    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <section id="statistik" class="py-20 border-t border-slate-200/80 bg-white">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8">
 
-        {{-- Header --}}
-        <div class="flex items-end justify-between gap-6 mb-12 flex-wrap fade-up">
-            <div>
-                <span class="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-2 block">Dampak Nyata</span>
-                <h2 class="font-display font-500 text-4xl text-slate-900 leading-tight">
-                    Platform aspirasi terpercaya<br>untuk sekolah Indonesia
-                </h2>
-            </div>
-            <p class="text-slate-500 text-sm leading-relaxed max-w-xs text-right">
-                Ribuan siswa telah membuktikan bahwa aspirasi yang tersampaikan dengan baik menghasilkan perubahan nyata.
-            </p>
-        </div>
-
-        {{-- Stats Grid --}}
-        <div class="grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-slate-200 border border-slate-200 rounded-2xl overflow-hidden mb-20 fade-up">
-            @foreach([
-                ['12,4K+', 'Aspirasi dikirim', 82],
-                ['95%', 'Tingkat respons', 95],
-                ['340+', 'Sekolah bergabung', 68],
-                ['87%', 'Aspirasi ditindak', 87],
-            ] as $stat)
-            <div class="bg-white p-8 sm:p-10">
-                <div class="h-0.5 bg-slate-100 rounded-full mb-5 overflow-hidden">
-                    <div class="h-full bg-slate-900 rounded-full" style="width: {{ $stat[2] }}%"></div>
+            {{-- Header --}}
+            <div class="flex items-end justify-between gap-6 mb-12 flex-wrap fade-up">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-2 block">Dampak
+                        Nyata</span>
+                    <h2 class="font-display font-500 text-4xl text-slate-900 leading-tight">
+                        Platform aspirasi terpercaya<br>untuk sekolah Indonesia
+                    </h2>
                 </div>
-                <div class="text-3xl sm:text-4xl font-display font-500 text-slate-900 tracking-tight mb-1">{{ $stat[0] }}</div>
-                <div class="text-xs text-slate-400">{{ $stat[1] }}</div>
-            </div>
-            @endforeach
-        </div>
-
-        {{-- CTA Block --}}
-        <div class="flex items-start gap-20 pb-20 border-t border-slate-100 pt-16 flex-wrap fade-up">
-            <div class="flex-1 min-w-[260px]">
-                <span class="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-3 block">Mulai sekarang</span>
-                <h2 class="font-display font-500 text-4xl text-slate-900 leading-tight tracking-tight mb-5">
-                    Suara kamu layak<br>untuk didengar.
-                </h2>
-                <p class="text-slate-500 text-sm leading-relaxed max-w-sm">
-                    Bergabunglah dengan ribuan siswa yang aspirasi mereka sudah menghasilkan perubahan nyata di sekolah masing-masing.
+                <p class="text-slate-500 text-sm leading-relaxed max-w-xs text-right">
+                    Ribuan siswa telah membuktikan bahwa aspirasi yang tersampaikan dengan baik menghasilkan perubahan
+                    nyata.
                 </p>
             </div>
-            <div class="flex flex-col gap-3 min-w-[240px]">
-                <a href="{{ route('siswa.login') }}"
-                    class="flex items-center justify-between gap-3 bg-slate-900 hover:bg-slate-700 text-white font-medium text-sm px-5 py-3.5 rounded-xl transition-colors">
-                    <span class="flex items-center gap-2.5">
-                        <span class="w-6 h-6 rounded-md bg-white/10 flex items-center justify-center">
-                            <svg class="w-3 h-3" fill="none" viewBox="0 0 16 16" stroke="white" stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 2v12M2 8l6-6 6 6"/>
-                            </svg>
-                        </span>
-                        Masuk sebagai Siswa
-                    </span>
-                    <svg class="w-4 h-4 opacity-40" fill="none" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 8h10M9 4l4 4-4 4"/>
-                    </svg>
-                </a>
-                <a href="{{ route('admin.login') }}"
-                    class="flex items-center justify-between gap-3 bg-slate-100 hover:bg-slate-200 text-slate-800 font-medium text-sm px-5 py-3.5 rounded-xl transition-colors border border-slate-200">
-                    <span class="flex items-center gap-2.5">
-                        <span class="w-6 h-6 rounded-md bg-slate-200 flex items-center justify-center">
-                            <svg class="w-3 h-3" fill="none" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M2 3h12a1 1 0 011 1v7a1 1 0 01-1 1H2a1 1 0 01-1-1V4a1 1 0 011-1zM6 3v9M10 3v9"/>
-                            </svg>
-                        </span>
-                        Login Admin Sekolah
-                    </span>
-                    <svg class="w-4 h-4 opacity-40" fill="none" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 8h10M9 4l4 4-4 4"/>
-                    </svg>
-                </a>
-                <span class="inline-flex items-center gap-1.5 text-xs text-emerald-600 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-full self-start mt-1">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                    Semua sistem berjalan normal
-                </span>
-            </div>
-        </div>
-    </div>
-</section>
 
-{{-- Footer --}}
-<footer class="bg-slate-50 border-t border-slate-200">
-    <div class="max-w-7xl mx-auto px-5 sm:px-8">
-        <div class="py-12 flex items-start gap-20 flex-wrap">
-            <div class="flex-1 min-w-[200px]">
-                <div class="flex items-center gap-2.5 mb-3">
-                    <div class="w-7 h-7 rounded-lg bg-slate-900 flex items-center justify-center">
-                        <svg class="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-                        </svg>
+            {{-- Stats Grid --}}
+            <div
+                class="grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-slate-200 border border-slate-200 rounded-2xl overflow-hidden mb-20 fade-up">
+                @foreach ([['12,4K+', 'Aspirasi dikirim', 82], ['95%', 'Tingkat respons', 95], ['340+', 'Sekolah bergabung', 68], ['87%', 'Aspirasi ditindak', 87]] as $stat)
+                    <div class="bg-white p-8 sm:p-10">
+                        <div class="h-0.5 bg-slate-100 rounded-full mb-5 overflow-hidden">
+                            <div class="h-full bg-slate-900 rounded-full" style="width: {{ $stat[2] }}%"></div>
+                        </div>
+                        <div class="text-3xl sm:text-4xl font-display font-500 text-slate-900 tracking-tight mb-1">
+                            {{ $stat[0] }}</div>
+                        <div class="text-xs text-slate-400">{{ $stat[1] }}</div>
                     </div>
-                    <span class="font-display font-500 text-sm text-slate-900">AspirasiKu</span>
-                </div>
-                <p class="text-xs text-slate-400 leading-relaxed max-w-[200px]">
-                    Platform aspirasi modern untuk ekosistem sekolah Indonesia. Transparan, terstruktur, terukur.
-                </p>
+                @endforeach
             </div>
-            <div class="flex gap-16 flex-wrap">
-                <div>
-                    <h4 class="text-[10px] font-semibold uppercase tracking-widest text-slate-400 mb-4">Platform</h4>
-                    <ul class="space-y-2.5">
-                        <li><a href="#fitur" class="text-xs text-slate-500 hover:text-slate-900 transition-colors">Fitur</a></li>
-                        <li><a href="#cara-kerja" class="text-xs text-slate-500 hover:text-slate-900 transition-colors">Cara Kerja</a></li>
-                        <li><a href="#statistik" class="text-xs text-slate-500 hover:text-slate-900 transition-colors">Statistik</a></li>
-                    </ul>
+
+            {{-- CTA Block --}}
+            <div class="flex items-start gap-20 pb-20 border-t border-slate-100 pt-16 flex-wrap fade-up">
+                <div class="flex-1 min-w-[260px]">
+                    <span class="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-3 block">Mulai
+                        sekarang</span>
+                    <h2 class="font-display font-500 text-4xl text-slate-900 leading-tight tracking-tight mb-5">
+                        Suara kamu layak<br>untuk didengar.
+                    </h2>
+                    <p class="text-slate-500 text-sm leading-relaxed max-w-sm">
+                        Bergabunglah dengan ribuan siswa yang aspirasi mereka sudah menghasilkan perubahan nyata di
+                        sekolah masing-masing.
+                    </p>
                 </div>
-                <div>
-                    <h4 class="text-[10px] font-semibold uppercase tracking-widest text-slate-400 mb-4">Akun</h4>
-                    <ul class="space-y-2.5">
-                        <li><a href="{{ route('siswa.login') }}" class="text-xs text-slate-500 hover:text-slate-900 transition-colors">Login Siswa</a></li>
-                        <li><a href="{{ route('admin.login') }}" class="text-xs text-slate-500 hover:text-slate-900 transition-colors">Login Admin</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-[10px] font-semibold uppercase tracking-widest text-slate-400 mb-4">Lainnya</h4>
-                    <ul class="space-y-2.5">
-                        <li><a href="#" class="text-xs text-slate-500 hover:text-slate-900 transition-colors">Kebijakan Privasi</a></li>
-                        <li><a href="#" class="text-xs text-slate-500 hover:text-slate-900 transition-colors">Syarat Penggunaan</a></li>
-                        <li><a href="#" class="text-xs text-slate-500 hover:text-slate-900 transition-colors">Bantuan</a></li>
-                    </ul>
+                <div class="flex flex-col gap-3 min-w-[240px]">
+                    <a href="{{ route('siswa.login') }}"
+                        class="flex items-center justify-between gap-3 bg-slate-900 hover:bg-slate-700 text-white font-medium text-sm px-5 py-3.5 rounded-xl transition-colors">
+                        <span class="flex items-center gap-2.5">
+                            <span class="w-6 h-6 rounded-md bg-white/10 flex items-center justify-center">
+                                <svg class="w-3 h-3" fill="none" viewBox="0 0 16 16" stroke="white"
+                                    stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 2v12M2 8l6-6 6 6" />
+                                </svg>
+                            </span>
+                            Masuk sebagai Siswa
+                        </span>
+                        <svg class="w-4 h-4 opacity-40" fill="none" viewBox="0 0 16 16" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8h10M9 4l4 4-4 4" />
+                        </svg>
+                    </a>
+                    <a href="{{ route('admin.login') }}"
+                        class="flex items-center justify-between gap-3 bg-slate-100 hover:bg-slate-200 text-slate-800 font-medium text-sm px-5 py-3.5 rounded-xl transition-colors border border-slate-200">
+                        <span class="flex items-center gap-2.5">
+                            <span class="w-6 h-6 rounded-md bg-slate-200 flex items-center justify-center">
+                                <svg class="w-3 h-3" fill="none" viewBox="0 0 16 16" stroke="currentColor"
+                                    stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M2 3h12a1 1 0 011 1v7a1 1 0 01-1 1H2a1 1 0 01-1-1V4a1 1 0 011-1zM6 3v9M10 3v9" />
+                                </svg>
+                            </span>
+                            Login Admin Sekolah
+                        </span>
+                        <svg class="w-4 h-4 opacity-40" fill="none" viewBox="0 0 16 16" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8h10M9 4l4 4-4 4" />
+                        </svg>
+                    </a>
+                    <span
+                        class="inline-flex items-center gap-1.5 text-xs text-emerald-600 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-full self-start mt-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                        Semua sistem berjalan normal
+                    </span>
                 </div>
             </div>
         </div>
-        <div class="border-t border-slate-200 py-5 flex items-center justify-between gap-4 flex-wrap">
-            <p class="text-[11px] text-slate-400">© 2025 AspirasiKu. Dibuat oleh Weillsun — XII RPL 1.</p>
-            <div class="flex items-center gap-5">
-                <a href="#" class="text-[11px] text-slate-400 hover:text-slate-700 transition-colors">Privasi</a>
-                <a href="#" class="text-[11px] text-slate-400 hover:text-slate-700 transition-colors">Ketentuan</a>
-                <a href="#" class="text-[11px] text-slate-400 hover:text-slate-700 transition-colors">Kontak</a>
+    </section>
+
+    {{-- Footer --}}
+    <footer class="bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8">
+            <div class="py-12 flex items-start gap-20 flex-wrap">
+                <div class="flex-1 min-w-[200px]">
+                    <div class="flex items-center gap-2.5 mb-3">
+                        <div class="w-7 h-7 rounded-lg bg-slate-900 flex items-center justify-center">
+                            <svg class="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                            </svg>
+                        </div>
+                        <span class="font-display font-500 text-sm text-slate-900">AspirasiKu</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed max-w-[200px]">
+                        Platform aspirasi modern untuk ekosistem sekolah Indonesia. Transparan, terstruktur, terukur.
+                    </p>
+                </div>
+                <div class="flex gap-16 flex-wrap">
+                    <div>
+                        <h4 class="text-[10px] font-semibold uppercase tracking-widest text-slate-400 mb-4">Platform
+                        </h4>
+                        <ul class="space-y-2.5">
+                            <li><a href="#fitur"
+                                    class="text-xs text-slate-500 hover:text-slate-900 transition-colors">Fitur</a>
+                            </li>
+                            <li><a href="#cara-kerja"
+                                    class="text-xs text-slate-500 hover:text-slate-900 transition-colors">Cara
+                                    Kerja</a></li>
+                            <li><a href="#statistik"
+                                    class="text-xs text-slate-500 hover:text-slate-900 transition-colors">Statistik</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-[10px] font-semibold uppercase tracking-widest text-slate-400 mb-4">Akun</h4>
+                        <ul class="space-y-2.5">
+                            <li><a href="{{ route('siswa.login') }}"
+                                    class="text-xs text-slate-500 hover:text-slate-900 transition-colors">Login
+                                    Siswa</a></li>
+                            <li><a href="{{ route('admin.login') }}"
+                                    class="text-xs text-slate-500 hover:text-slate-900 transition-colors">Login
+                                    Admin</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-[10px] font-semibold uppercase tracking-widest text-slate-400 mb-4">Lainnya
+                        </h4>
+                        <ul class="space-y-2.5">
+                            <li><a href="#"
+                                    class="text-xs text-slate-500 hover:text-slate-900 transition-colors">Kebijakan
+                                    Privasi</a></li>
+                            <li><a href="#"
+                                    class="text-xs text-slate-500 hover:text-slate-900 transition-colors">Syarat
+                                    Penggunaan</a></li>
+                            <li><a href="#"
+                                    class="text-xs text-slate-500 hover:text-slate-900 transition-colors">Bantuan</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-slate-200 py-5 flex items-center justify-between gap-4 flex-wrap">
+                <p class="text-[11px] text-slate-400">© 2025 AspirasiKu. Dibuat oleh Weillsun — XII RPL 1.</p>
+                <div class="flex items-center gap-5">
+                    <a href="#"
+                        class="text-[11px] text-slate-400 hover:text-slate-700 transition-colors">Privasi</a>
+                    <a href="#"
+                        class="text-[11px] text-slate-400 hover:text-slate-700 transition-colors">Ketentuan</a>
+                    <a href="#"
+                        class="text-[11px] text-slate-400 hover:text-slate-700 transition-colors">Kontak</a>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
     {{-- Scroll reveal script --}}
     <script>
