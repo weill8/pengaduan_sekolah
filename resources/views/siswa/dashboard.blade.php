@@ -184,15 +184,15 @@
 
                         {{-- Feedback snippet --}}
                         @if($laporan->aspirasi?->feedback)
-                            <p class="mt-2 text-xs text-slate-500 bg-slate-100 rounded-lg px-3 py-1.5 line-clamp-1">
-                                💬 {{ $laporan->aspirasi->feedback }}
+                            <p class="mt-2 w-fit text-sm line-clamp-1">
+                                🙍‍♂️💬: <span class="text-slate-500 bg-slate-100 font-mono rounded-r-full rounded-tl-full px-2.5 py-1">{{ $laporan->aspirasi->feedback }}</span>
                             </p>
                         @endif
                     </div>
                 </div>
 
                 {{-- Status + Action --}}
-                <div class="flex flex-col items-end gap-2 flex-shrink-0">
+                <div class="flex flex-col items-end gap-2 shrink-0">
                     <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold {{ $s['class'] }}">
                         <span class="w-1.5 h-1.5 rounded-full {{ $s['dot'] }}"></span>
                         {{ $s['label'] }}
