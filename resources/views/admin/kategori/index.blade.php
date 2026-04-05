@@ -65,10 +65,11 @@
             <table class="w-full text-sm text-left">
                 <thead>
                     <tr class="bg-white border-b border-slate-100">
-                        <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-center w-16">No</th>
-                        <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Nama Kategori</th>
-                        <th
-                            class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                        <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-center w-16">
+                            No</th>
+                        <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Nama
+                            Kategori</th>
+                        <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">
                             Dibuat</th>
                         <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Aksi
                         </th>
@@ -93,7 +94,8 @@
                                                 d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                                         </svg>
                                     </div>
-                                    <span class="font-semibold truncate max-w-52 text-slate-800 text-sm">{{ $kategori->ket_kategori }}</span>
+                                    <span
+                                        class="font-semibold truncate max-w-52 text-slate-800 text-sm">{{ $kategori->ket_kategori }}</span>
                                 </div>
                             </td>
                             <td class="px-6 py-4">
@@ -190,7 +192,7 @@
     {{-- ============================================================ --}}
     {{-- MODAL TAMBAH --}}
     {{-- ============================================================ --}}
-    <div id="modalTambah" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4">
+    <div id="modalTambah" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
         {{-- Backdrop --}}
         <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
             onclick="document.getElementById('modalTambah').classList.add('hidden')"></div>
@@ -269,7 +271,7 @@
     {{-- ============================================================ --}}
     {{-- MODAL EDIT --}}
     {{-- ============================================================ --}}
-    <div id="modalEdit" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4">
+    <div id="modalEdit" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
         {{-- Backdrop --}}
         <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
             onclick="document.getElementById('modalEdit').classList.add('hidden')"></div>

@@ -31,7 +31,7 @@
                 class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-100 to-violet-100 flex items-center justify-center flex-shrink-0">
                 <span class="text-sm font-bold text-indigo-700">{{ strtoupper(substr($siswa->nama, 0 , 1)) }}</span>
             </div>
-            <div class="hidden sm:block">
+            <div class="block">
                 <p class="text-xs font-semibold text-slate-600">{{ $siswa->nama }}</p>
                 <p class="text-xs text-slate-400">NIS: <span class="px-1 bg-gray-100 rounded-sm text-slate-600">{{ $siswa->nis }}</span></p>
             </div>

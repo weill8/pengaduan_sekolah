@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
     <title>Register Siswa — AspirasiKu</title>
 
     {{-- Favicon --}}
@@ -226,7 +226,7 @@
                 <div class="flex justify-between items-center gap-2 fade-in" style="animation-delay: 0.3s">
 
                     {{-- Nama Field --}}
-                    <div class="mb-5 fade-in">
+                    <div class="mb-5 fade-in flex-1">
                         <div class="flex justify-between items-center mb-2 text-sm font-medium text-slate-700">
                             <label for="nis" class="">Nama</label>
                             <span class="mr-2 font-mono"><span id="char-count" class="font-bold">0</span>/100</span>
@@ -259,7 +259,7 @@
                     </div>
 
                     {{-- Class Select Field --}}
-                    <div class="mb-5 fade-in">
+                    <div class="mb-5 fade-in flex-1">
                         <label for="id_kelas" class="block text-sm font-medium text-slate-700 mb-2">Kelas</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">

@@ -63,7 +63,7 @@
     <div class="group relative overflow-hidden rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-100 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5">
         <div class="flex items-start justify-between">
             <div>
-                <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Menunggu</p>
+                <p class="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400">Menunggu</p>
                 <p class="mt-2 text-3xl font-bold text-amber-600">{{ $menunggu }}</p>
                 <p class="mt-1 text-xs text-slate-400">Menunggu ditangangi</p>
             </div>
@@ -130,10 +130,10 @@
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
             </svg>
-            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Laporan Terbaru</span>
+            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Laporan Terbaru</span>
         </div>
         <a href="{{ route('siswa.histori.histori') }}"
-           class="inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 hover:text-indigo-700 transition-colors">
+           class="inline-flex items-center gap-1 text-[10px] font-semibold text-indigo-600 hover:text-indigo-700 transition-colors">
             Lihat semua
             <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
@@ -166,7 +166,7 @@
                     </div>
                     <div class="min-w-0">
                         <p class="text-sm font-semibold text-slate-700 whitespace-pre-line wrap-break-word">{{ $laporan->ket }}</p>
-                        <div class="flex items-center gap-2 mt-1 flex-wrap">
+                        <div class="flex items-center gap-2 mt-1 whitespace-nowrap overflow-x-auto">
                             <span class="text-xs text-slate-400">{{ $laporan->kategori?->ket_kategori ?? '-' }}</span>
                             <span class="text-slate-200">·</span>
                             <span class="inline-flex items-center gap-1 text-xs text-slate-400">

@@ -64,7 +64,7 @@
 
                 {{-- Filter Siswa --}}
                 <div>
-                    <label for="nis" class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Nama Siswa / NIS</label>
+                    <label for="nis" class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Nama / NIS</label>
                     <input list="listNis" id="nis" name="search" value="{{ request('search') }}"
                         placeholder="Cari Nama / NIS..."
                         class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-400 transition-all">

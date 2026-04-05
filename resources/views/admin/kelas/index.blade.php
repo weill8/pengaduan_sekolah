@@ -41,9 +41,10 @@
                     </svg>
                 </a>
             @else
-            <button type="submit" class="absolute border-l-2 border-slate-200 inset-y-0 right-0 px-3 flex items-center text-slate-400 hover:text-slate-600 transition-colors">
-                search    
-            </button>
+                <button type="submit"
+                    class="absolute border-l-2 border-slate-200 inset-y-0 right-0 px-3 flex items-center text-slate-400 hover:text-slate-600 transition-colors">
+                    search
+                </button>
             @endif
         </div>
     </form>
@@ -64,8 +65,10 @@
             <table class="w-full text-sm text-left">
                 <thead>
                     <tr class="bg-white border-b border-slate-100">
-                        <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-center w-16">No</th>
-                        <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Nama Kelas</th>
+                        <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-center w-16">
+                            No</th>
+                        <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Nama
+                            Kelas</th>
                         <th
                             class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider hidden sm:table-cell">
                             Dibuat</th>
@@ -92,7 +95,8 @@
                                                 d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                                         </svg>
                                     </div>
-                                    <span class="font-semibold truncate max-w-xs text-slate-800 text-sm">{{ $k->nama_kelas }}</span>
+                                    <span
+                                        class="font-semibold truncate max-w-xs text-slate-800 text-sm">{{ $k->nama_kelas }}</span>
                                 </div>
                             </td>
                             <td class="px-6 py-4 hidden sm:table-cell">
@@ -187,7 +191,7 @@
     {{-- ============================================================ --}}
     {{-- MODAL TAMBAH --}}
     {{-- ============================================================ --}}
-    <div id="modalTambah" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4">
+    <div id="modalTambah" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
         {{-- Backdrop --}}
         <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
             onclick="document.getElementById('modalTambah').classList.add('hidden')"></div>
@@ -264,7 +268,7 @@
     {{-- ============================================================ --}}
     {{-- MODAL EDIT --}}
     {{-- ============================================================ --}}
-    <div id="modalEdit" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4">
+    <div id="modalEdit" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
         {{-- Backdrop --}}
         <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
             onclick="document.getElementById('modalEdit').classList.add('hidden')"></div>
