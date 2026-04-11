@@ -28,7 +28,7 @@ class UpdateKelasRequest extends FormRequest
                 'required',
                 'string',
                 'max:50',
-                Rule::unique('tb_kelas', 'nama_kelas')->ignore($this->kelas),
+                Rule::unique('tb_kelas', 'nama_kelas')->ignore($this->kela),
             ]
         ];
     }

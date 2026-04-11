@@ -13,18 +13,20 @@ return new class extends Migration
     {
         Schema::create('tb_input_aspirasi', function (Blueprint $table) {
             $table->id('id_pelaporan');
+
             $table->unsignedBigInteger('nis');
             $table->foreign('nis')
                 ->references('nis')
                 ->on('tb_siswa')
                 ->cascadeOnDelete();
-            $table->unsignedBigInteger('id_kategori');
-            $table->foreign('id_kategori')
-                ->references('id_kategori')
-                ->on('tb_kategori')
+
+            $table->foreignId('id_kategori')
+                ->constrained('tb_kategori', 'id_kategori')
                 ->cascadeOnDelete();
+
             $table->string('lokasi', 50);
             $table->string('ket', 50);
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }

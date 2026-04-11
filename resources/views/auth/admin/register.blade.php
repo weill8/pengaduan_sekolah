@@ -24,63 +24,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/dm-sans@5.0.0/index.min.css">
 
     <style>
-        /* Grain overlay */
-        .grain::after {
-            content: '';
-            position: fixed;
-            inset: -200%;
-            width: 400%;
-            height: 400%;
-            background-image: url("image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-            opacity: 0.025;
-            pointer-events: none;
-            z-index: 9999;
-            animation: grain 8s steps(10) infinite;
-        }
-
-        @keyframes grain {
-
-            0%,
-            100% {
-                transform: translate(0, 0);
-            }
-
-            10% {
-                transform: translate(-5%, -10%);
-            }
-
-            20% {
-                transform: translate(-15%, 5%);
-            }
-
-            30% {
-                transform: translate(7%, -25%);
-            }
-
-            40% {
-                transform: translate(-5%, 25%);
-            }
-
-            50% {
-                transform: translate(-15%, 10%);
-            }
-
-            60% {
-                transform: translate(15%, 0%);
-            }
-
-            70% {
-                transform: translate(0%, 15%);
-            }
-
-            80% {
-                transform: translate(3%, 35%);
-            }
-
-            90% {
-                transform: translate(-10%, 10%);
-            }
-        }
 
         /* Glow blob */
         .blob {
@@ -138,7 +81,7 @@
 </head>
 
 <body x-data="{ showPassword: false, showConfirmPassword: false }"
-    class="grain bg-slate-50 text-slate-900 antialiased min-h-screen flex items-center justify-center p-4 relative overflow-x-hidden">
+    class="bg-slate-50 text-slate-900 antialiased min-h-screen flex items-center justify-center p-4 relative overflow-x-hidden">
 
     {{-- Background blobs --}}
     <div class="absolute top-20 -left-32 w-64 h-64 blob bg-violet-400/20"></div>

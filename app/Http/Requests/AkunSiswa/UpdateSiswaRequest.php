@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\AkunSiswa;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class SiswaRegisterRequest extends FormRequest
+class UpdateSiswaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +24,15 @@ class SiswaRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nis'      => ['required', 'size:8', 'regex:/^[0-9]+$/', 'unique:tb_siswa,nis'],
+            'nis'      => [
+                'required',
+                'size:8',
+                'regex:/^[0-9]+$/',
+                Rule::unique('tb_siswa', 'nis')->ignore($this->route('akunSiswa')->nis, 'nis'),
+            ],
             'id_kelas' => ['required', 'exists:tb_kelas,id'],
             'nama'     => ['required', 'string', 'max:100'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'password' => ['nullable', 'string', 'min:6', 'confirmed'],
         ];
     }
 
@@ -44,7 +50,7 @@ class SiswaRegisterRequest extends FormRequest
             'nama.required'     => 'Nama wajib diisi.',
             'nama.string'       => 'Nama harus berupa teks.',
             'nama.max'          => 'Nama maksimal 100 karakter.',
-            
+
             'password.required' => 'Password wajib diisi.',
             'password.min'      => 'Password minimal 6 karakter.',
             'password.confirmed' => 'Konfirmasi password tidak cocok.',

@@ -4,6 +4,7 @@ use App\Http\Middleware\AuthAdmin;
 use App\Http\Middleware\AuthSiswa;
 use App\Http\Middleware\GuestAdmin;
 use App\Http\Middleware\GuestSiswa;
+use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -20,6 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'auth.siswa'  => AuthSiswa::class,
             'guest.admin' => GuestAdmin::class,
             'guest.siswa' => GuestSiswa::class,
+            'role'        => RoleMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

@@ -76,8 +76,7 @@
                         <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Progres Penyelesaian</span>
                     </div>
 
-                    <div
-                        class="w-full max-w-2xl mx-auto bg-white/70 backdrop-blur-md shadow-sm p-8">
+                    <div class="w-full max-w-2xl mx-auto bg-white/70 backdrop-blur-md shadow-sm p-8">
                         <div class="relative flex items-center justify-between">
 
                             {{-- Step 1: Menunggu --}}
@@ -112,8 +111,7 @@
                             {{-- Garis 1 (Antara Menunggu & Proses) --}}
                             <div class="relative flex-1 h-1.5 mx-3 overflow-hidden">
                                 {{-- Track Background: Abu-abu Dashed --}}
-                                <div
-                                    class="absolute inset-0 rounded-full bg-slate-100  border-slate-300">
+                                <div class="absolute inset-0 rounded-full bg-slate-100  border-slate-300">
                                 </div>
                                 {{-- Progress Fill --}}
                                 <div class="absolute left-0 top-0 h-full rounded-full bg-gradient-to-r from-emerald-400 to-teal-500 transition-all duration-700 ease-out shadow-[0_0_12px_rgba(16,185,129,0.35)]"
@@ -153,8 +151,7 @@
                             {{-- Garis 2 (Antara Proses & Selesai) --}}
                             <div class="relative flex-1 h-1.5 mx-3 overflow-hidden">
                                 {{-- Track Background: Abu-abu Dashed --}}
-                                <div
-                                    class="absolute inset-0 rounded-full bg-slate-100  border-slate-300">
+                                <div class="absolute inset-0 rounded-full bg-slate-100  border-slate-300">
                                 </div>
                                 {{-- Progress Fill --}}
                                 <div class="absolute left-0 top-0 h-full rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 transition-all duration-700 ease-out shadow-[0_0_12px_rgba(16,185,129,0.35)]"
@@ -248,7 +245,25 @@
                     </div>
                 </div>
 
+                {{-- Quick Info Card --}}
+                <div class="rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden">
+                    <div class="bg-slate-50/80 px-6 py-3.5 border-b border-slate-100 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Info Tambahan</span>
+                    </div>
+                    <div class="p-6 ">
 
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-slate-400">Terakhir Update</span>
+                            <span
+                                class="text-slate-600">{{ $inputAspirasi->aspirasi?->updated_at?->translatedFormat('d M Y') ?? '-' }}</span>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
@@ -272,7 +287,8 @@
                         @if ($inputAspirasi->aspirasi?->feedback)
                             <div class="space-y-4">
                                 <p
-                                    class="text-sm text-slate-700 whitespace-pre-line wrap-break-word bg-emerald-50/50 rounded-xl px-4 py-3 border border-emerald-100">{{ $inputAspirasi->aspirasi->feedback }}</p>
+                                    class="text-sm text-slate-700 whitespace-pre-line wrap-break-word bg-emerald-50/50 rounded-xl px-4 py-3 border border-emerald-100">
+                                    {{ $inputAspirasi->aspirasi->feedback }}</p>
 
                                 <div class="flex items-center gap-3 pt-3 border-t border-slate-100">
                                     <div
@@ -308,22 +324,25 @@
                     </div>
                 </div>
 
-                {{-- Quick Info Card --}}
+                {{-- foto --}}
                 <div class="rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden">
                     <div class="bg-slate-50/80 px-6 py-3.5 border-b border-slate-100 flex items-center gap-2">
                         <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                             stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 7h4l2-2h6l2 2h4v12H3V7z" />
+                            <circle cx="12" cy="13" r="3" stroke-linecap="round" stroke-linejoin="round">
+                            </circle>
                         </svg>
-                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Info Tambahan</span>
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Foto Lampiran</span>
                     </div>
                     <div class="p-6 ">
-
-                        <div class="flex items-center justify-between text-sm">
-                            <span class="text-slate-400">Terakhir Update</span>
-                            <span
-                                class="text-slate-600">{{ $inputAspirasi->aspirasi?->updated_at?->translatedFormat('d M Y') ?? '-' }}</span>
+                        <div class="flex items-center">
+                            @if ($inputAspirasi->foto)
+                                <img src="{{ asset('storage/' . $inputAspirasi->foto) }}"
+                                    class="w-[270px] h-[270px] object-cover rounded-lg">
+                            @else
+                                <span class="text-slate-400 italic font-xs">Tidak ada foto terlampir.</span>
+                            @endif
                         </div>
                     </div>
                 </div>

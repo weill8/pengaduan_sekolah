@@ -9,6 +9,7 @@ use App\Models\InputAspirasi;
 use App\Models\Kategori;
 use App\Models\Kelas;
 use App\Models\Siswa;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -19,16 +20,36 @@ class AspirasiController extends Controller
         $query = InputAspirasi::with(['siswa.kelas', 'kategori', 'aspirasi'])
             ->latest();
 
-        // Filter per tanggal (YYYY-MM-DD)
-        if ($request->filled('tanggal')) {
-            $query->whereDay('created_at', $request->tanggal);
+        $today = Carbon::today();
+
+        // Validasi: tanggal tidak boleh diisi tanpa bulan
+        if ($request->filled('tanggal') && !$request->filled('bulan')) {
+            return back()->with('error', 'Pilih bulan terlebih dahulu sebelum memilih tanggal');
         }
 
-        // Filter per bulan (format: YYYY-MM)
         if ($request->filled('bulan')) {
             [$tahun, $bulan] = explode('-', $request->bulan);
-            $query->whereYear('created_at', $tahun)
-                ->whereMonth('created_at', $bulan);
+
+            $selectedMonth = Carbon::createFromDate((int)$tahun, (int)$bulan, 1)->startOfMonth();
+
+            if ($selectedMonth->gt($today->copy()->startOfMonth())) {
+                return back()->with('error', 'Tidak bisa memilih bulan di masa depan');
+            }
+
+            // Jika tanggal juga diisi, filter spesifik per hari
+            if ($request->filled('tanggal')) {
+                $selectedFullDate = Carbon::createFromDate((int)$tahun, (int)$bulan, (int)$request->tanggal);
+
+                if ($selectedFullDate->gt($today)) {
+                    return back()->with('error', 'Tidak bisa memilih tanggal di masa depan');
+                }
+
+                $query->whereDate('created_at', $selectedFullDate);
+            } else {
+                // Filter per bulan saja
+                $query->whereYear('created_at', $tahun)
+                    ->whereMonth('created_at', $bulan);
+            }
         }
 
         // Filter per siswa (NIS) atau nama

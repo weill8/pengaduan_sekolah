@@ -24,63 +24,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/dm-sans@5.0.0/index.min.css">
 
     <style>
-        /* Grain overlay */
-        .grain::after {
-            content: '';
-            position: fixed;
-            inset: -200%;
-            width: 400%;
-            height: 400%;
-            background-image: url("image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-            opacity: 0.025;
-            pointer-events: none;
-            z-index: 9999;
-            animation: grain 8s steps(10) infinite;
-        }
-
-        @keyframes grain {
-
-            0%,
-            100% {
-                transform: translate(0, 0);
-            }
-
-            10% {
-                transform: translate(-5%, -10%);
-            }
-
-            20% {
-                transform: translate(-15%, 5%);
-            }
-
-            30% {
-                transform: translate(7%, -25%);
-            }
-
-            40% {
-                transform: translate(-5%, 25%);
-            }
-
-            50% {
-                transform: translate(-15%, 10%);
-            }
-
-            60% {
-                transform: translate(15%, 0%);
-            }
-
-            70% {
-                transform: translate(0%, 15%);
-            }
-
-            80% {
-                transform: translate(3%, 35%);
-            }
-
-            90% {
-                transform: translate(-10%, 10%);
-            }
-        }
 
         /* Glow blob */
         .blob {
@@ -147,7 +90,7 @@
 </head>
 
 <body x-data="{ showPassword: false, showConfirmPassword: false }"
-    class="grain bg-slate-50 text-slate-900 antialiased min-h-screen flex items-center justify-center p-4 relative overflow-x-hidden">
+    class="bg-slate-50 text-slate-900 antialiased min-h-screen flex items-center justify-center p-4 relative overflow-x-hidden">
 
     {{-- Background blobs --}}
     <div class="absolute top-20 -left-32 w-64 h-64 blob bg-violet-400/20"></div>
@@ -196,8 +139,7 @@
 
                 {{-- NIS Field --}}
                 <div class="mb-5 fade-in" style="animation-delay: 0.2s">
-                    <label for="nis" class="block text-sm font-medium text-slate-700 mb-2">NIS (Nomor Induk
-                        Siswa)</label>
+                    <label for="nis" class="block text-sm font-medium text-slate-700 mb-2">NIS (Nomor Induk Siswa)</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                             <svg class="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -206,8 +148,10 @@
                                     d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
                             </svg>
                         </div>
-                        <input type="number" id="nis" name="nis" value="{{ old('nis') }}"
+                        <input type="text" id="nis" name="nis" value="{{ old('nis') }}"
                             placeholder="Masukkan NIS kamu"
+                            maxlength="8"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                             class="input-field w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 placeholder-slate-400 text-sm"
                             required autofocus>
                     </div>

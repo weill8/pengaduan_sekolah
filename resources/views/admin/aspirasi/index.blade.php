@@ -15,17 +15,6 @@
         </div>
     </div>
 
-    {{-- Flash Message --}}
-    @if (session('success'))
-        <div
-            class="mb-5 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700 shadow-sm flex items-center gap-2">
-            <svg class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-            </svg>
-            {{ session('success') }}
-        </div>
-    @endif
-
     {{-- Filter Card --}}
     <div class="rounded-2xl border border-slate-100 bg-white shadow-sm mb-6 overflow-hidden">
         <div class="bg-slate-50/80 px-6 py-3.5 border-b border-slate-100 flex items-center gap-2">
@@ -39,12 +28,19 @@
         <form method="GET" action="{{ route('admin.aspirasi.index') }}" class="p-6">
             <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
-                {{-- Filter Tanggal --}}
+                {{-- filter bulan --}}
                 <div>
-                    <label for="tanggal"
-                        class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Tanggal</label>
+                    <label for="bulan" class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Bulan</label>
+                    <input type="month" max="{{ now()->format('Y-m') }}" id="bulan" name="bulan" value="{{ request('bulan') }}"
+                        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-400 transition-all" />
+                </div>
+
+                {{-- filter tanggal --}}
+                <div>
+                    <label for="tanggal" class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Tanggal</label>
                     <select id="tanggal" name="tanggal"
-                        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-400 transition-all">
+                        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                        {{ !request('bulan') ? 'disabled' : '' }}>
                         <option value="">Semua Tanggal</option>
                         @for ($i = 1; $i <= 31; $i++)
                             <option value="{{ $i }}" {{ request('tanggal') == $i ? 'selected' : '' }}>
@@ -52,14 +48,6 @@
                             </option>
                         @endfor
                     </select>
-                </div>
-
-                {{-- Filter Bulan --}}
-                <div>
-                    <label for="bulan"
-                        class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Bulan</label>
-                    <input type="month" id="bulan" name="bulan" value="{{ request('bulan') }}"
-                        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-400 transition-all" />
                 </div>
 
                 {{-- Filter Siswa --}}
@@ -225,7 +213,7 @@
                                     <select name="status" onchange="this.form.submit()"
                                         class="w-auto bg-slate-50 border border-slate-200 rounded-lg py-1.5 text-xs font-semibold text-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-400 transition-all cursor-pointer">
 
-                                        <option value="" disabled selected hidden class="">⚙️</option>
+                                        <option value="" disabled selected hidden class="">⚙️ Edit</option>
                                         @foreach (['menunggu', 'proses', 'selesai'] as $s)
                                             <option value="{{ $s }}"
                                                 {{ $s === $item->status ? 'selected' : '' }}>
@@ -299,5 +287,53 @@
             </div>
         @endif
     </div>
+
+    @push('scripts')
+        <script>
+            const bulanInput = document.getElementById('bulan');
+            const tanggalSelect = document.getElementById('tanggal');
+
+            // Hari ini
+            const todayYear  = {{ now()->year }};
+            const todayMonth = {{ now()->month }};
+            const todayDay   = {{ now()->day }};
+
+            function updateTanggalOptions() {
+                const bulanVal = bulanInput.value;
+
+                if (!bulanVal) {
+                    tanggalSelect.disabled = true;
+                    tanggalSelect.value = '';
+                    return;
+                }
+
+                tanggalSelect.disabled = false;
+
+                const [tahun, bulan] = bulanVal.split('-').map(Number);
+
+                // Hitung jumlah hari di bulan yang dipilih
+                const hariDalamBulan = new Date(tahun, bulan, 0).getDate();
+
+                // Tentukan batas hari maksimal
+                const isCurrentMonth = (tahun === todayYear && bulan === todayMonth);
+                const maxHari = isCurrentMonth ? todayDay : hariDalamBulan;
+
+                // Rebuild options
+                let html = '<option value="">Semua Tanggal</option>';
+                for (let i = 1; i <= hariDalamBulan; i++) {
+                    const isDisabled = i > maxHari;
+                    const isSelected = {{ request('tanggal') ? (int)request('tanggal') : 'null' }} === i;
+                    html += `<option value="${i}" ${isDisabled ? 'disabled' : ''} ${isSelected && !isDisabled ? 'selected' : ''}>${i}</option>`;
+                }
+
+                tanggalSelect.innerHTML = html;
+            }
+
+            bulanInput.addEventListener('change', updateTanggalOptions);
+
+            // Jalankan saat halaman load (kalau bulan sudah terisi dari request)
+            updateTanggalOptions();
+        </script>
+    @endpush
 
 @endsection

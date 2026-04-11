@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>@yield('title', 'Siswa Panel') — AspirasiKu</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     {{-- Favicon --}}
@@ -282,7 +283,7 @@
         {{-- Main Content --}}
         <main class="flex-1 ml-0 md:ml-64 p-4 md:p-6 overflow-x-auto">
             {{-- Page Content --}}
-            <div class="bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl shadow-slate-200/40 border border-white/50 p-4 sm:p-6 lg:p-8 mb-20 lg:mb-0 md:mb-0">
+            <div class="bg-white/80  backdrop-blur-xl rounded-3xl shadow-xl shadow-slate-200/40 border border-white/50 p-4 sm:p-6 lg:p-8 mb-20 lg:mb-0 md:mb-0">
                 @yield('content')
             </div>
         </main>
@@ -336,7 +337,19 @@
         </div>
     </div>
 
-    @push('scripts')
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: '{{ session('success') }}',
+                timer: 2000,
+                showConfirmButton: false,
+                timerProgressBar: true
+            });
+        </script>
+    @endif
+
         <script>
             function toggleDropdown() {
                 const panel = document.getElementById('dropdownPanel');
@@ -356,7 +369,8 @@
                 }
             });
         </script>
-    @endpush
+
+    @stack('modals')
     @stack('scripts')
 </body>
 </html>

@@ -22,6 +22,7 @@ class StoreAspirasiRequest extends FormRequest
             'id_kategori' => ['required', 'exists:tb_kategori,id_kategori'],
             'lokasi'      => ['required', 'string', 'max:255'],
             'ket'         => ['required', 'string', 'max:255'],
+            'foto'        => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
         ];
     }
 
@@ -34,6 +35,9 @@ class StoreAspirasiRequest extends FormRequest
             'lokasi.max'           => 'Lokasi maksimal 255 karakter.',
             'ket.required'         => 'Keterangan wajib diisi.',
             'ket.max'              => 'Keterangan maksimal 255 karakter.',
+            'foto.image'           => 'File harus berupa gambar.',
+            'foto.mimes'           => 'Format gambar tidak valid. Harus berupa JPG, JPEG, atau PNG.',
+            'foto.max'             => 'Ukuran gambar maksimal 2MB.',
         ];
     }
 }

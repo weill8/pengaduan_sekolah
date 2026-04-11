@@ -14,7 +14,7 @@ class Siswa extends Authenticatable
     protected $primaryKey = 'nis';
 
     public $incrementing = false;
-    protected $keyType = 'int';
+    protected $keyType = 'string';
 
     protected $fillable = [
         'nis',

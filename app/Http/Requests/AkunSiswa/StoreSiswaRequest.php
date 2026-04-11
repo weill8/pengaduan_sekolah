@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\AkunSiswa;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class SiswaRegisterRequest extends FormRequest
+class StoreSiswaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

@@ -57,17 +57,6 @@
         </span>
     </div>
 
-    {{-- Flash Message --}}
-    @if (session('success'))
-        <div
-            class="mb-5 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700 shadow-sm flex items-center gap-2">
-            <svg class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-            </svg>
-            {{ session('success') }}
-        </div>
-    @endif
-
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
 
         {{-- 
@@ -177,6 +166,28 @@
                     </div>
                 </div>
             
+                {{-- foto --}}
+                <div class="rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden">
+                    <div class="bg-slate-50/80 px-6 py-3.5 border-b border-slate-100 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 7h4l2-2h6l2 2h4v12H3V7z" />
+                            <circle cx="12" cy="13" r="3" stroke-linecap="round" stroke-linejoin="round">
+                            </circle>
+                        </svg>
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Foto Lampiran</span>
+                    </div>
+                    <div class="p-6 ">
+                        <div class="flex items-center">
+                            @if ($aspirasi->foto)
+                                <img src="{{ asset('storage/' . $aspirasi->foto) }}"
+                                    class="w-[270px] h-[270px] object-cover rounded-lg">
+                            @else
+                                <span class="text-slate-400 italic font-xs">Tidak ada foto terlampir.</span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
 
         </div>
 

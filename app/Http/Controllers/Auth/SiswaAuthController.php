@@ -25,7 +25,7 @@ class SiswaAuthController extends Controller
     {
         $credentials = [
             'nis'      => $request->nis,
-            'password' => $request->password,
+            'password' => $request-> password,
         ];
 
         if (Auth::guard('siswa')->attempt($credentials, $request->boolean('remember'))) {
@@ -42,29 +42,29 @@ class SiswaAuthController extends Controller
 
     // ==================== REGISTER ====================
 
-    public function showRegisterForm()
-    {
-        // Kirim data kelas untuk dropdown
-        $kelasList = Kelas::select('id', 'nama_kelas')->get();
+    // public function showRegisterForm()
+    // {
+    //     // Kirim data kelas untuk dropdown
+    //     $kelasList = Kelas::select('id', 'nama_kelas')->get();
 
-        return view('auth.siswa.register', compact('kelasList'));
-    }
+    //     return view('auth.siswa.register', compact('kelasList'));
+    // }
 
-    public function register(SiswaRegisterRequest $request)
-    {
-        $siswa = Siswa::create([
-            'nis'      => $request->nis,
-            'nama'     => $request->nama,
-            'id_kelas' => $request->id_kelas,
-            'password' => Hash::make($request->password),
-        ]);
+    // public function register(SiswaRegisterRequest $request)
+    // {
+    //     $siswa = Siswa::create([
+    //         'nis'      => $request->nis,
+    //         'nama'     => $request->nama,
+    //         'id_kelas' => $request->id_kelas,
+    //         'password' => Hash::make($request->password),
+    //     ]);
 
-        Auth::guard('siswa')->login($siswa);
-        $request->session()->regenerate();
+    //     Auth::guard('siswa')->login($siswa);
+    //     $request->session()->regenerate();
 
-        return redirect()->route('siswa.dashboard')
-            ->with('success', 'Akun siswa berhasil dibuat!');
-    }
+    //     return redirect()->route('siswa.dashboard')
+    //         ->with('success', 'Akun siswa berhasil dibuat!');
+    // }
 
     // ==================== LOGOUT ====================
 

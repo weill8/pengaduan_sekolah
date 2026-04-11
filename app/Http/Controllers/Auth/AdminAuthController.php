@@ -38,24 +38,24 @@ class AdminAuthController extends Controller
 
     // ==================== REGISTER ====================
 
-    public function showRegisterForm()
-    {
-        return view('auth.admin.register');
-    }
+    // public function showRegisterForm()
+    // {
+    //     return view('auth.admin.register');
+    // }
 
-    public function register(AdminRegisterRequest $request)
-    {
-        $admin = Admin::create([
-            'username' => $request->username,
-            'password' => Hash::make($request->password),
-        ]);
+    // public function register(AdminRegisterRequest $request)
+    // {
+    //     $admin = Admin::create([
+    //         'username' => $request->username,
+    //         'password' => Hash::make($request->password),
+    //     ]);
 
-        Auth::guard('admin')->login($admin);
-        $request->session()->regenerate();
+    //     Auth::guard('admin')->login($admin);
+    //     $request->session()->regenerate();
 
-        return redirect()->route('admin.dashboard')
-            ->with('success', 'Akun admin berhasil dibuat!');
-    }
+    //     return redirect()->route('admin.dashboard')
+    //         ->with('success', 'Akun admin berhasil dibuat!');
+    // }
 
     // ==================== LOGOUT ====================
 

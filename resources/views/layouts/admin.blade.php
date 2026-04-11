@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin Panel') — AspirasiKu</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     {{-- Favicon --}}
@@ -15,6 +16,24 @@
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
 
     <style>
+    .x-scrollbar::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .x-scrollbar::-webkit-scrollbar-button,
+     {
+        display: none;
+    }
+
+    .x-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .x-scrollbar::-webkit-scrollbar-thumb {
+        background: #cbd5f5; 
+        border-radius: 9999px;
+    }
+
         .sidebar-link {
             position: relative;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -73,7 +92,7 @@
             border-radius: 4px;
         }
 
-        .sidebar-scroll::-webkit-scrollbar-thumb:hover {
+        ::-webkit-scrollbsidebar-scrollar-thumb:hover {
             background: #cbd5e1;
         }
 
@@ -95,7 +114,7 @@
     </style>
 </head>
 
-<body class="bg-slate-50 min-h-screen font-sans overflow-x-hidden">
+<body class="bg-slate-50 min-h-screen font-sans y-scrollbar overflow-x-hidden">
 
     <nav
         class="fixed top-0 left-0 md:left-64 right-0 h-16 bg-white/90 backdrop-blur-md border-b border-slate-200 z-40 transition-all duration-300">
@@ -137,7 +156,9 @@
                         <div class="text-right hidden md:block lg:block">
                             <p class="text-sm font-semibold text-slate-700 leading-none">
                                 {{ Auth::guard('admin')->user()->username }}</p>
-                            <p class="text-xs text-slate-500 mt-0.5">Super Admin</p>
+                            <p class="text-xs text-slate-500 font-mono mt-0.5">
+                                {{ Auth::guard('admin')->user()->role === 'super_admin' ? 'Super Admin' : 'Admin' }}
+                            </p>
                         </div>
 
                         <div
@@ -192,7 +213,7 @@
     <div class="flex">
         {{-- Desktop Sidebar --}}
         <aside
-            class="hidden md:flex flex-col w-64 fixed z-50 left-0 top-0 h-screen bg-white/80 backdrop-blur-xl border-r border-slate-200 p-5 sidebar-scroll overflow-y-auto flex flex-col">
+            class="hidden md:flex flex-col w-64 fixed z-50 left-0 top-0 h-screen bg-white/80 backdrop-blur-xl border-r border-slate-200 p-5 overflow-y-auto sidebar-scroll flex flex-col">
 
             {{-- Menu Header --}}
             <div
@@ -239,6 +260,56 @@
                         @endif
                     </a>
                 </li>
+
+                @if (Auth::guard('admin')->user()->role === 'super_admin')
+                    <li>
+                        <a href="{{ route('admin.akunAdmin.index') }}"
+                            class="sidebar-link flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-slate-600 font-semibold text-sm
+                                    {{ request()->routeIs('admin.akunAdmin.index') ? 'active' : '' }}">
+                            <div class="{{ request()->routeIs('admin.akunAdmin.index') ? '' : 'text-slate-400' }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                                </svg>
+
+                            </div>
+                            <span>Akun Admin</span>
+                            @if (request()->routeIs('admin.akunAdmin.index'))
+                                <svg class="w-4 h-4 ml-auto opacity-60" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            @endif
+                        </a>
+                    </li>
+                @endif
+
+                <li>
+                    <a href="{{ route('admin.akunSiswa.index') }}"
+                        class="sidebar-link flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-slate-600 font-semibold text-sm
+                                {{ request()->routeIs('admin.akunSiswa.index') ? 'active' : '' }}">
+                        <div class="{{ request()->routeIs('admin.akunSiswa.index') ? '' : 'text-slate-400' }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
+                            </svg>
+
+
+                        </div>
+                        <span>Akun Siswa</span>
+                        @if (request()->routeIs('admin.akunSiswa.index'))
+                            <svg class="w-4 h-4 ml-auto opacity-60" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        @endif
+                    </a>
+                </li>
+
                 <li>
                     <a href="{{ route('admin.kelas.index') }}"
                         class="sidebar-link flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-slate-600 font-semibold text-sm
@@ -260,6 +331,7 @@
                         @endif
                     </a>
                 </li>
+
                 <li>
                     <a href="{{ route('admin.kategori.index') }}"
                         class="sidebar-link flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-slate-600 font-semibold text-sm
@@ -408,7 +480,7 @@
 
             {{-- Page Content --}}
             <div
-                class="bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl shadow-slate-200/40 border border-white/50 p-6 lg:p-8 mb-16 lg:mb-0 md:mb-0">
+                class="bg-white/80 backdrop-blur-xl  rounded-3xl shadow-xl shadow-slate-200/40 border border-white/50 p-6 lg:p-8 mb-16 lg:mb-0 md:mb-0">
                 @yield('content')
             </div>
         </main>
@@ -426,11 +498,11 @@
                     class="absolute inset-0 bg-gradient-to-t from-white/60 via-white/20 to-transparent pointer-events-none">
                 </div>
 
-                <div class="flex items-center justify-between px-2 py-3 relative z-10">
+                <div class="flex items-center justify-between px-2 py-3 relative z-10 overflow-x-auto x-scrollbar">
 
                     {{-- Dashboard --}}
                     <a href="{{ route('admin.dashboard') }}"
-                        class="relative flex flex-col items-center justify-center w-full transition-all duration-300 active:scale-95 {{ request()->routeIs('admin.dashboard') ? '' : 'opacity-60 hover:opacity-100' }}">
+                        class="relative flex flex-col items-center justify-center min-w-[70px] transition-all duration-300 active:scale-95 {{ request()->routeIs('admin.dashboard') ? '' : 'opacity-60 hover:opacity-100' }}">
 
                         {{-- Icon Container --}}
                         <div
@@ -457,9 +529,76 @@
                         </span>
                     </a>
 
+                    @if (Auth::guard('admin')->user()->role === 'super_admin')
+                        {{-- akun admin --}}
+                        <a href="{{ route('admin.akunAdmin.index') }}"
+                            class="relative flex flex-col items-center justify-center min-w-[70px] transition-all duration-300 active:scale-95 {{ request()->routeIs('admin.akunAdmin.index') ? '' : 'opacity-60 hover:opacity-100' }}">
+
+                            <div
+                                class="relative w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 
+                        {{ request()->routeIs('admin.akunAdmin.index') ? 'bg-indigo-500/20 shadow-inner shadow-indigo-500/10' : 'bg-transparent' }}">
+
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="w-6 h-6 transition-all duration-300 ease-out
+                                    {{ request()->routeIs('admin.akunAdmin.index') ? 'text-indigo-600 scale-110' : 'text-slate-500 scale-100' }}">
+
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                                </svg>
+
+                            </div>
+
+                            <div
+                                class="absolute -bottom-2 w-1 h-1 rounded-full bg-indigo-600 opacity-0 transition-all duration-300 {{ request()->routeIs('admin.akunAdmin.index') ? 'opacity-100 scale-125' : 'opacity-0 scale-75' }}">
+                            </div>
+
+                            <span
+                                class="text-[10px] font-medium mt-1 transition-colors duration-300 
+                        {{ request()->routeIs('admin.akunAdmin.index') ? 'text-indigo-700' : 'text-slate-400' }}">
+                                Admin
+                            </span>
+                        </a>
+                    @endif
+
+                    {{-- akun siswa--}}
+                    <a href="{{ route('admin.akunSiswa.index') }}"
+                        class="relative flex flex-col items-center justify-center min-w-[70px] transition-all duration-300 active:scale-95 {{ request()->routeIs('admin.akunSiswa.index') ? '' : 'opacity-60 hover:opacity-100' }}">
+
+                        <div
+                            class="relative w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 
+                    {{ request()->routeIs('admin.akunSiswa.index') ? 'bg-indigo-500/20 shadow-inner shadow-indigo-500/10' : 'bg-transparent' }}">
+
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-6 h-6 transition-all duration-300 ease-out
+                                {{ request()->routeIs('admin.akunSiswa.index') ? 'text-indigo-600 scale-110' : 'text-slate-500 scale-100' }}">
+
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
+                            </svg>
+                        </div>
+
+                        <div
+                            class="absolute -bottom-2 w-1 h-1 rounded-full bg-indigo-600 opacity-0 transition-all duration-300 {{ request()->routeIs('admin.akunSiswa.index') ? 'opacity-100 scale-125' : 'opacity-0 scale-75' }}">
+                        </div>
+
+                        <span
+                            class="text-[10px] font-medium mt-1 transition-colors duration-300 
+                    {{ request()->routeIs('admin.akunSiswa.index') ? 'text-indigo-700' : 'text-slate-400' }}">
+                            Siswa
+                        </span>
+                    </a>
+
                     {{-- Kelas --}}
                     <a href="{{ route('admin.kelas.index') }}"
-                        class="relative flex flex-col items-center justify-center w-full transition-all duration-300 active:scale-95 {{ request()->routeIs('admin.kelas.*') ? '' : 'opacity-60 hover:opacity-100' }}">
+                        class="relative flex flex-col items-center justify-center min-w-[70px] transition-all duration-300 active:scale-95 {{ request()->routeIs('admin.kelas.*') ? '' : 'opacity-60 hover:opacity-100' }}">
 
                         <div
                             class="relative w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 
@@ -486,7 +625,7 @@
 
                     {{-- Kategori --}}
                     <a href="{{ route('admin.kategori.index') }}"
-                        class="relative flex flex-col items-center justify-center w-full transition-all duration-300 active:scale-95 {{ request()->routeIs('admin.kategori.*') ? '' : 'opacity-60 hover:opacity-100' }}">
+                        class="relative flex flex-col items-center justify-center min-w-[70px] transition-all duration-300 active:scale-95 {{ request()->routeIs('admin.kategori.*') ? '' : 'opacity-60 hover:opacity-100' }}">
 
                         <div
                             class="relative w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 
@@ -513,7 +652,7 @@
 
                     {{-- Aspirasi --}}
                     <a href="{{ route('admin.aspirasi.index') }}"
-                        class="relative flex flex-col items-center justify-center w-full transition-all duration-300 active:scale-95 {{ request()->routeIs('admin.aspirasi.index') ? '' : 'opacity-60 hover:opacity-100' }}">
+                        class="relative flex flex-col items-center justify-center min-w-[70px] transition-all duration-300 active:scale-95 {{ request()->routeIs('admin.aspirasi.index') ? '' : 'opacity-60 hover:opacity-100' }}">
 
                         <div
                             class="relative w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 
@@ -540,7 +679,7 @@
 
                     {{-- Histori --}}
                     <a href="{{ route('admin.histori.histori') }}"
-                        class="relative flex flex-col items-center justify-center w-full transition-all duration-300 active:scale-95 {{ request()->routeIs('admin.histori.histori') ? '' : 'opacity-60 hover:opacity-100' }}">
+                        class="relative flex flex-col items-center justify-center min-w-[70px] transition-all duration-300 active:scale-95 {{ request()->routeIs('admin.histori.histori') ? '' : 'opacity-60 hover:opacity-100' }}">
 
                         <div
                             class="relative w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 
@@ -569,7 +708,19 @@
         </div>
     </div>
 
-    @push('scripts')
+    @if (session('success') || session('error'))
+        <script>
+            Swal.fire({
+                icon: '{{ session('success') ? 'success' : 'error' }}',
+                title: '{{ session('success') ? 'Berhasil' : 'Oops...' }}',
+                text: '{{ session('success') ?? session('error') }}',
+                timer: 2000,
+                showConfirmButton: false,
+                timerProgressBar: true
+            });
+        </script>
+    @endif
+
         <script>
             function toggleDropdown() {
                 const panel = document.getElementById('dropdownPanel');
@@ -588,8 +739,30 @@
                     document.getElementById('dropdownChevron').style.transform = '';
                 }
             });
+
+            document.querySelectorAll('.form-delete').forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    Swal.fire({
+                        title: 'Apakah Anda yakin?',
+                        text: 'Data tidak bisa dikembalikan!',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#dc2626',
+                        cancelButtonColor: '#9ca3af',
+                        confirmButtonText: 'Ya, hapus!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
+                });
+        });
         </script>
-    @endpush
+    
+    @stack('modals')
     @stack('scripts')
 </body>
 

@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Siswa\StoreAspirasiRequest;
 use App\Models\InputAspirasi;
 use App\Models\Kategori;
-// use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class InputAspirasiController extends Controller
 {
@@ -21,11 +22,18 @@ class InputAspirasiController extends Controller
     // Simpan aspirasi
     public function store(StoreAspirasiRequest $request)
     {
+        $fotoPath = null;
+
+        // cek kalo ada foto
+        if ($request->hasFile('foto')) {
+            $fotoPath = $request->file('foto')->store('aspirasi', 'public');
+        }
         InputAspirasi::create([
             'nis'         => Auth::guard('siswa')->user()->nis,
             'id_kategori' => $request->id_kategori,
             'lokasi'      => $request->lokasi,
             'ket'         => $request->ket,
+            'foto'        => $fotoPath ?? null,
         ]);
 
         return redirect()->route('siswa.histori.histori')
@@ -40,7 +48,9 @@ class InputAspirasiController extends Controller
             ->latest()
             ->paginate(10);
 
-        return view('siswa.aspirasi.histori', compact('aspirasis'));
+        $kategoris = Kategori::all();
+
+        return view('siswa.aspirasi.histori', compact('aspirasis', 'kategoris'));
     }
 
     // Halaman detail aspirasi (status, feedback, progres)
@@ -56,5 +66,39 @@ class InputAspirasiController extends Controller
         $inputAspirasi->load(['kategori', 'aspirasi.admin']);
 
         return view('siswa.aspirasi.show', compact('inputAspirasi'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = InputAspirasi::findOrFail($id);
+
+        // cek pemilik
+        if ($data->nis !== Auth::guard('siswa')->user()->nis) {
+            abort(403);
+        }
+
+        // default pakai foto lama
+        $fotoPath = $data->foto;
+
+        // kalau upload foto baru
+        if ($request->hasFile('foto')) {
+
+            // 🔥 hapus foto lama (jika ada)
+            if ($data->foto && Storage::disk('public')->exists($data->foto)) {
+                Storage::disk('public')->delete($data->foto);
+            }
+
+            // simpan foto baru
+            $fotoPath = $request->file('foto')->store('aspirasi', 'public');
+        }
+
+        $data->update([
+            'id_kategori' => $request->id_kategori,
+            'lokasi'      => $request->lokasi,
+            'ket'         => $request->ket,
+            'foto'        => $fotoPath,
+        ]);
+
+        return redirect()->back()->with('success', 'Aspirasi berhasil diupdate');
     }
 }
