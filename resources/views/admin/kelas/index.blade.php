@@ -13,6 +13,7 @@
             </div>
             <p class="text-sm text-slate-400 ml-3">Kelola data kelas yang terdaftar di sistem</p>
         </div>
+        @if (Auth::guard('admin')->user()->role === 'super_admin')
         <button onclick="document.getElementById('modalTambah').classList.remove('hidden')"
             class="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-lg shadow-indigo-500/25 transition-all hover:-translate-y-0.5 active:translate-y-0">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -20,6 +21,7 @@
             </svg>
             Tambah Kelas
         </button>
+        @endif
     </div>
 
     {{-- Search Bar --}}
@@ -77,10 +79,12 @@
                         <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Nama
                             Kelas</th>
                         <th
-                            class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider hidden sm:table-cell">
+                            class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider hidden text-center sm:table-cell">
                             Dibuat</th>
-                        <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Aksi
-                        </th>
+                        @if (Auth::guard('admin')->user()->role === 'super_admin')
+                        <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Aksi</th>
+                        @endif
+                    
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-50">
@@ -93,7 +97,7 @@
                                 </span>
                             </td>
                             <td class="px-6 py-4">
-                                <div class="flex items-center gap-3">
+                                <div class="flex items-center justify-center gap-3">
                                     <div
                                         class="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-100 to-violet-100 flex items-center justify-center flex-shrink-0 group-hover:from-indigo-200 group-hover:to-violet-200 transition-colors">
                                         <svg class="w-4 h-4 text-indigo-500" fill="none" viewBox="0 0 24 24"
@@ -107,7 +111,7 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 hidden sm:table-cell">
-                                <span class="inline-flex items-center gap-1.5 text-xs text-slate-400">
+                                <span class="flex items-center justify-center gap-1.5 text-xs text-slate-400">
                                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                         stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -116,6 +120,7 @@
                                     {{ $k->created_at->format('d M Y') }}
                                 </span>
                             </td>
+                            @if (Auth::guard('admin')->user()->role === 'super_admin')
                             <td class="px-6 py-4">
                                 <div class="flex items-center justify-center gap-2">
                                     {{-- Edit Button --}}
@@ -145,6 +150,7 @@
                                     </form>
                                 </div>
                             </td>
+                            @endif
                         </tr>
                     @empty
                         <tr>
@@ -173,8 +179,11 @@
                                             </p>
                                         @else
                                             <p class="text-sm font-semibold text-slate-500">Belum ada kelas</p>
+                                            @if (Auth::guard('admin')->user()->role === 'super_admin')
                                             <p class="text-xs text-slate-400 mt-0.5">Klik tombol "Tambah Kelas" untuk mulai
                                                 menambahkan</p>
+                                            @endif
+                                            
                                         @endif
                                     </div>
                                 </div>
@@ -193,7 +202,7 @@
         @endif
     </div>
 
-
+@if (Auth::guard('admin')->user()->role === 'super_admin')
     @push('modals')
         {{-- MODAL TAMBAH --}}
         <div id="modalTambah" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -356,6 +365,7 @@
             </div>
         </div>
     @endpush
+@endif
 
 
     {{-- Scripts --}}

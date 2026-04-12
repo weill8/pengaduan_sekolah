@@ -14,13 +14,15 @@
             <p class="text-sm text-slate-400 ml-3">Kelola kategori aspirasi yang tersedia di sistem</p>
         </div>
         
-        <button onclick="document.getElementById('modalTambah').classList.remove('hidden')"
-            class="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-lg shadow-indigo-500/25 transition-all hover:-translate-y-0.5 active:translate-y-0">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-            </svg>
-            Tambah Kategori
-        </button>
+        @if (Auth::guard('admin')->user()->role === 'super_admin')
+            <button onclick="document.getElementById('modalTambah').classList.remove('hidden')"
+                class="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-lg shadow-indigo-500/25 transition-all hover:-translate-y-0.5 active:translate-y-0">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+                Tambah Kategori
+            </button>
+        @endif
     </div>
 
     {{-- Search Bar --}}
@@ -77,10 +79,11 @@
                             No</th>
                         <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Nama
                             Kategori</th>
-                        <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                        <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">
                             Dibuat</th>
-                        <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Aksi
-                        </th>
+                            @if (Auth::guard('admin')->user()->role === 'super_admin')
+                                <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Aksi</th>
+                            @endif
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-50">
@@ -93,7 +96,7 @@
                                 </span>
                             </td>
                             <td class="px-6 py-4">
-                                <div class="flex items-center gap-3">
+                                <div class="flex items-center justify-center gap-3">
                                     <div
                                         class="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-100 to-purple-100 flex items-center justify-center flex-shrink-0 group-hover:from-violet-200 group-hover:to-purple-200 transition-colors">
                                         <svg class="w-4 h-4 text-violet-500" fill="none" viewBox="0 0 24 24"
@@ -107,7 +110,7 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4">
-                                <span class="inline-flex items-center gap-1.5 text-xs text-slate-400">
+                                <span class="flex items-center justify-center gap-1.5 text-xs text-slate-400">
                                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                         stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -116,37 +119,39 @@
                                     {{ $kategori->created_at->format('d M Y') }}
                                 </span>
                             </td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center justify-center gap-2">
-                                    {{-- Edit Button --}}
-                                    <button
-                                        onclick="openModalEdit({{ $kategori->id_kategori }}, '{{ $kategori->ket_kategori }}')"
-                                        class="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-600 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-lg transition-all hover:shadow-sm">
-                                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                            stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                        </svg>
-                                        Edit
-                                    </button>
-
-                                    {{-- Delete Button --}}
-                                    <form method="POST"
-                                        action="{{ route('admin.kategori.destroy', $kategori->id_kategori) }}" class="form-delete">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            class="btn-delete inline-flex items-center gap-1.5 text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 px-3 py-1.5 rounded-lg transition-all hover:shadow-sm">
-                                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24"
-                                                stroke="currentColor" stroke-width="2">
+                            @if (Auth::guard('admin')->user()->role === 'super_admin')
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center justify-center gap-2">
+                                        {{-- Edit Button --}}
+                                        <button
+                                            onclick="openModalEdit({{ $kategori->id_kategori }}, '{{ $kategori->ket_kategori }}')"
+                                            class="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-600 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-lg transition-all hover:shadow-sm">
+                                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                                stroke-width="2">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                             </svg>
-                                            Hapus
+                                            Edit
                                         </button>
-                                    </form>
-                                </div>
-                            </td>
+
+                                        {{-- Delete Button --}}
+                                        <form method="POST"
+                                            action="{{ route('admin.kategori.destroy', $kategori->id_kategori) }}" class="form-delete">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="btn-delete inline-flex items-center gap-1.5 text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 px-3 py-1.5 rounded-lg transition-all hover:shadow-sm">
+                                                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                                Hapus
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            @endif
                         </tr>
                     @empty
                         <tr>
@@ -175,8 +180,10 @@
                                             </p>
                                         @else
                                             <p class="text-sm font-semibold text-slate-500">Belum ada kategori</p>
-                                            <p class="text-xs text-slate-400 mt-0.5">Klik tombol "Tambah Kategori" untuk
-                                                mulai menambahkan</p>
+                                            @if (Auth::guard('admin')->user()->role === 'super_admin')
+                                                <p class="text-xs text-slate-400 mt-0.5">Klik tombol "Tambah Kategori" untuk
+                                                    mulai menambahkan</p>
+                                            @endif
                                         @endif
                                     </div>
                                 </div>
@@ -195,169 +202,171 @@
         @endif
     </div>
 
-    @push('modals')
-        {{-- MODAL TAMBAH --}}
-        <div id="modalTambah" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
-            {{-- Backdrop --}}
-            <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
-                onclick="document.getElementById('modalTambah').classList.add('hidden')"></div>
+    @if (Auth::guard('admin')->user()->role === 'super_admin')
+        @push('modals')
+            {{-- MODAL TAMBAH --}}
+            <div id="modalTambah" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+                {{-- Backdrop --}}
+                <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+                    onclick="document.getElementById('modalTambah').classList.add('hidden')"></div>
 
-            {{-- Modal Card --}}
-            <div
-                class="relative bg-white rounded-3xl shadow-2xl shadow-slate-900/20 w-full max-w-md border border-slate-100 overflow-hidden">
-                {{-- Modal Header --}}
-                <div class="flex items-center justify-between px-6 py-5 border-b border-slate-100">
-                    <div class="flex items-center gap-3">
-                        <div
-                            class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
-                            <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                {{-- Modal Card --}}
+                <div
+                    class="relative bg-white rounded-3xl shadow-2xl shadow-slate-900/20 w-full max-w-md border border-slate-100 overflow-hidden">
+                    {{-- Modal Header --}}
+                    <div class="flex items-center justify-between px-6 py-5 border-b border-slate-100">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                                <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 class="text-base font-bold text-slate-800">Tambah Kategori</h2>
+                                <p class="text-xs text-slate-400">Isi nama kategori baru</p>
+                            </div>
+                        </div>
+                        <button onclick="document.getElementById('modalTambah').classList.add('hidden')"
+                            class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors">
+                            <svg class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                 stroke-width="2.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
-                        </div>
-                        <div>
-                            <h2 class="text-base font-bold text-slate-800">Tambah Kategori</h2>
-                            <p class="text-xs text-slate-400">Isi nama kategori baru</p>
-                        </div>
+                        </button>
                     </div>
-                    <button onclick="document.getElementById('modalTambah').classList.add('hidden')"
-                        class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors">
-                        <svg class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            stroke-width="2.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
 
-                {{-- Modal Body --}}
-                <form method="POST" action="{{ route('admin.kategori.store') }}">
-                    @csrf
-                    <div class="px-6 py-5">
-                        <div class="flex items-center justify-between">
+                    {{-- Modal Body --}}
+                    <form method="POST" action="{{ route('admin.kategori.store') }}">
+                        @csrf
+                        <div class="px-6 py-5">
+                            <div class="flex items-center justify-between">
+                                <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Nama
+                                    Kategori</label>
+                                <span class="text-xs text-slate-400 font-mono"><span id="char-count">0</span>/50</span>
+                            </div>
+
+                            <input type="text" id="ketKategori" name="ket_kategori" value="{{ old('ket_kategori') }}"
+                                maxlength="50" autofocus
+                                class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-400 transition-all
+                        @error('ket_kategori') border-red-400 bg-red-50 focus:ring-red-500/20 focus:border-red-400 @enderror"
+                                placeholder="Contoh: Kebersihan, Fasilitas, dll">
+                            @error('ket_kategori')
+                                <div class="flex items-center gap-1.5 mt-2">
+                                    <svg class="w-3.5 h-3.5 text-red-500 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <p class="text-red-500 text-xs font-medium">{{ $message }}</p>
+                                </div>
+                            @enderror
+                        </div>
+
+                        {{-- Modal Footer --}}
+                        <div class="flex justify-end gap-2.5 px-6 py-4 bg-slate-50/80 border-t border-slate-100">
+                            <button type="button" onclick="document.getElementById('modalTambah').classList.add('hidden')"
+                                class="px-5 py-2.5 text-sm font-semibold text-slate-600 bg-white border border-slate-200 rounded-xl hover:bg-slate-100 transition-all">
+                                Batal
+                            </button>
+                            <button type="submit"
+                                class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white rounded-xl shadow-lg shadow-indigo-500/25 transition-all hover:-translate-y-0.5 active:translate-y-0">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                                Simpan
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            {{-- MODAL EDIT --}}
+            <div id="modalEdit" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+                {{-- Backdrop --}}
+                <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+                    onclick="document.getElementById('modalEdit').classList.add('hidden')"></div>
+
+                {{-- Modal Card --}}
+                <div
+                    class="relative bg-white rounded-3xl shadow-2xl shadow-slate-900/20 w-full max-w-md border border-slate-100 overflow-hidden">
+                    {{-- Modal Header --}}
+                    <div class="flex items-center justify-between px-6 py-5 border-b border-slate-100">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/30">
+                                <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 class="text-base font-bold text-slate-800">Edit Kategori</h2>
+                                <p class="text-xs text-slate-400">Ubah nama kategori yang dipilih</p>
+                            </div>
+                        </div>
+                        <button onclick="document.getElementById('modalEdit').classList.add('hidden')"
+                            class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors">
+                            <svg class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    {{-- Modal Body --}}
+                    <form method="POST" id="formEdit" action="">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="id_kategori" id="editId" value="{{ old('id_kategori') }}">
+                        <div class="px-6 py-5">
+                            <div class="flex items-center justify-between">
                             <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Nama
                                 Kategori</label>
-                            <span class="text-xs text-slate-400 font-mono"><span id="char-count">0</span>/50</span>
-                        </div>
-
-                        <input type="text" id="ketKategori" name="ket_kategori" value="{{ old('ket_kategori') }}"
-                            maxlength="50" autofocus
-                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-400 transition-all
-                    @error('ket_kategori') border-red-400 bg-red-50 focus:ring-red-500/20 focus:border-red-400 @enderror"
-                            placeholder="Contoh: Kebersihan, Fasilitas, dll">
-                        @error('ket_kategori')
-                            <div class="flex items-center gap-1.5 mt-2">
-                                <svg class="w-3.5 h-3.5 text-red-500 flex-shrink-0" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <p class="text-red-500 text-xs font-medium">{{ $message }}</p>
+                                <span class="text-xs text-slate-400 font-mono"><span id="char-count-edit">0</span>/50</span>
                             </div>
-                        @enderror
-                    </div>
-
-                    {{-- Modal Footer --}}
-                    <div class="flex justify-end gap-2.5 px-6 py-4 bg-slate-50/80 border-t border-slate-100">
-                        <button type="button" onclick="document.getElementById('modalTambah').classList.add('hidden')"
-                            class="px-5 py-2.5 text-sm font-semibold text-slate-600 bg-white border border-slate-200 rounded-xl hover:bg-slate-100 transition-all">
-                            Batal
-                        </button>
-                        <button type="submit"
-                            class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white rounded-xl shadow-lg shadow-indigo-500/25 transition-all hover:-translate-y-0.5 active:translate-y-0">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                stroke-width="2.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                            </svg>
-                            Simpan
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-
-        {{-- MODAL EDIT --}}
-        <div id="modalEdit" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
-            {{-- Backdrop --}}
-            <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
-                onclick="document.getElementById('modalEdit').classList.add('hidden')"></div>
-
-            {{-- Modal Card --}}
-            <div
-                class="relative bg-white rounded-3xl shadow-2xl shadow-slate-900/20 w-full max-w-md border border-slate-100 overflow-hidden">
-                {{-- Modal Header --}}
-                <div class="flex items-center justify-between px-6 py-5 border-b border-slate-100">
-                    <div class="flex items-center gap-3">
-                        <div
-                            class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/30">
-                            <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                stroke-width="2.5">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                            </svg>
+                            <input type="text" name="ket_kategori" id="editKetKategori" maxlength="50"
+                                value="{{ old('ket_kategori') }}"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-400 transition-all
+                        @error('ket_kategori') border-red-400 bg-red-50 @enderror"
+                                placeholder="Nama kategori">
+                            @error('ket_kategori')
+                                <div class="flex items-center gap-1.5 mt-2">
+                                    <svg class="w-3.5 h-3.5 text-red-500 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <p class="text-red-500 text-xs font-medium">{{ $message }}</p>
+                                </div>
+                            @enderror
                         </div>
-                        <div>
-                            <h2 class="text-base font-bold text-slate-800">Edit Kategori</h2>
-                            <p class="text-xs text-slate-400">Ubah nama kategori yang dipilih</p>
+
+                        {{-- Modal Footer --}}
+                        <div class="flex justify-end gap-2.5 px-6 py-4 bg-slate-50/80 border-t border-slate-100">
+                            <button type="button" onclick="document.getElementById('modalEdit').classList.add('hidden')"
+                                class="px-5 py-2.5 text-sm font-semibold text-slate-600 bg-white border border-slate-200 rounded-xl hover:bg-slate-100 transition-all">
+                                Batal
+                            </button>
+                            <button type="submit"
+                                class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white rounded-xl shadow-lg shadow-amber-500/25 transition-all hover:-translate-y-0.5 active:translate-y-0">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                                </svg>
+                                Perbarui
+                            </button>
                         </div>
-                    </div>
-                    <button onclick="document.getElementById('modalEdit').classList.add('hidden')"
-                        class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors">
-                        <svg class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            stroke-width="2.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
+                    </form>
                 </div>
-
-                {{-- Modal Body --}}
-                <form method="POST" id="formEdit" action="">
-                    @csrf
-                    @method('PUT')
-                    <input type="hidden" name="id_kategori" id="editId" value="{{ old('id_kategori') }}">
-                    <div class="px-6 py-5">
-                        <div class="flex items-center justify-between">
-                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Nama
-                            Kategori</label>
-                            <span class="text-xs text-slate-400 font-mono"><span id="char-count-edit">0</span>/50</span>
-                        </div>
-                        <input type="text" name="ket_kategori" id="editKetKategori" maxlength="50"
-                            value="{{ old('ket_kategori') }}"
-                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-400 transition-all
-                    @error('ket_kategori') border-red-400 bg-red-50 @enderror"
-                            placeholder="Nama kategori">
-                        @error('ket_kategori')
-                            <div class="flex items-center gap-1.5 mt-2">
-                                <svg class="w-3.5 h-3.5 text-red-500 flex-shrink-0" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <p class="text-red-500 text-xs font-medium">{{ $message }}</p>
-                            </div>
-                        @enderror
-                    </div>
-
-                    {{-- Modal Footer --}}
-                    <div class="flex justify-end gap-2.5 px-6 py-4 bg-slate-50/80 border-t border-slate-100">
-                        <button type="button" onclick="document.getElementById('modalEdit').classList.add('hidden')"
-                            class="px-5 py-2.5 text-sm font-semibold text-slate-600 bg-white border border-slate-200 rounded-xl hover:bg-slate-100 transition-all">
-                            Batal
-                        </button>
-                        <button type="submit"
-                            class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white rounded-xl shadow-lg shadow-amber-500/25 transition-all hover:-translate-y-0.5 active:translate-y-0">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                stroke-width="2.5">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                            </svg>
-                            Perbarui
-                        </button>
-                    </div>
-                </form>
             </div>
-        </div>
-    @endpush
+        @endpush
+    @endif
 
     {{-- Scripts --}}
     @push('scripts')
