@@ -30,14 +30,17 @@
 
                 {{-- filter bulan --}}
                 <div>
-                    <label for="bulan" class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Bulan</label>
-                    <input type="month" max="{{ now()->format('Y-m') }}" id="bulan" name="bulan" value="{{ request('bulan') }}"
+                    <label for="bulan"
+                        class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Bulan</label>
+                    <input type="month" max="{{ now()->format('Y-m') }}" id="bulan" name="bulan"
+                        value="{{ request('bulan') }}"
                         class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-400 transition-all" />
                 </div>
 
                 {{-- filter tanggal --}}
                 <div>
-                    <label for="tanggal" class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Tanggal</label>
+                    <label for="tanggal"
+                        class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Tanggal</label>
                     <select id="tanggal" name="tanggal"
                         class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                         {{ !request('bulan') ? 'disabled' : '' }}>
@@ -52,7 +55,8 @@
 
                 {{-- Filter Siswa --}}
                 <div>
-                    <label for="nis" class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Nama / NIS</label>
+                    <label for="nis" class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Nama
+                        / NIS</label>
                     <input list="listNis" id="nis" name="search" value="{{ request('search') }}"
                         placeholder="Cari Nama / NIS..."
                         class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-400 transition-all">
@@ -294,9 +298,9 @@
             const tanggalSelect = document.getElementById('tanggal');
 
             // Hari ini
-            const todayYear  = {{ now()->year }};
+            const todayYear = {{ now()->year }};
             const todayMonth = {{ now()->month }};
-            const todayDay   = {{ now()->day }};
+            const todayDay = {{ now()->day }};
 
             function updateTanggalOptions() {
                 const bulanVal = bulanInput.value;
@@ -322,8 +326,9 @@
                 let html = '<option value="">Semua Tanggal</option>';
                 for (let i = 1; i <= hariDalamBulan; i++) {
                     const isDisabled = i > maxHari;
-                    const isSelected = {{ request('tanggal') ? (int)request('tanggal') : 'null' }} === i;
-                    html += `<option value="${i}" ${isDisabled ? 'disabled' : ''} ${isSelected && !isDisabled ? 'selected' : ''}>${i}</option>`;
+                    const isSelected = {{ request('tanggal') ? (int) request('tanggal') : 'null' }} === i;
+                    html +=
+                        `<option value="${i}" ${isDisabled ? 'disabled' : ''} ${isSelected && !isDisabled ? 'selected' : ''}>${i}</option>`;
                 }
 
                 tanggalSelect.innerHTML = html;

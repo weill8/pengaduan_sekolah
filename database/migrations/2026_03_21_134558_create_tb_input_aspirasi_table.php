@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tb_input_aspirasi', function (Blueprint $table) {
             $table->id('id_pelaporan');
 
-            $table->unsignedBigInteger('nis');
+            $table->char('nis', 8);
             $table->foreign('nis')
                 ->references('nis')
                 ->on('tb_siswa')
