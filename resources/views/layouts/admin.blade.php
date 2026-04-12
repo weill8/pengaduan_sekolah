@@ -180,7 +180,9 @@
                         <div class="px-4 py-3 bg-gradient-to-br from-indigo-50 to-violet-50 border-b border-slate-100">
                             <p class="text-xs font-bold text-slate-700 truncate">
                                 {{ Auth::guard('admin')->user()->username }}</p>
-                            <p class="text-[11px] text-indigo-500 font-medium mt-0.5">Super Admin</p>
+                            <p class="text-[11px] text-indigo-500 font-medium mt-0.5">
+                                {{ Auth::guard('admin')->user()->role === 'super_admin' ? 'Super Admin' : 'Admin' }}
+                            </p>
                         </div>
 
                         <div class="p-2">
