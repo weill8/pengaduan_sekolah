@@ -137,7 +137,7 @@
                 <span class="font-display font-700 text-lg tracking-tight text-slate-900">AspirasiKu</span>
             </a>
 
-            {{-- Desktop Nav - Centered Absolutely --}}
+            {{-- Desktop Nav --}}
             <ul class="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-7">
                 <li><a href="#fitur"
                         class="nav-link text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">Fitur</a>

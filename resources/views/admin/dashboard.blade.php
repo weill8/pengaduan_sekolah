@@ -89,9 +89,9 @@
 
 </div>
 
-{{-- ═══════════════════════════════════════════
+{{-- 
     CHARTS
-═══════════════════════════════════════════ --}}
+ --}}
 <div class="grid grid-cols-1 gap-5 lg:grid-cols-3 mb-8">
 
     {{-- Line Chart: Aspirasi per hari --}}
@@ -124,9 +124,9 @@
 
 </div>
 
-{{-- ═══════════════════════════════════════════
+{{-- 
     RECENT REPORTS TABLE
-═══════════════════════════════════════════ --}}
+ --}}
 <div class="rounded-2xl bg-white shadow-sm ring-1 ring-gray-100 overflow-hidden">
 
     {{-- Table Header --}}
@@ -248,9 +248,9 @@
     </div>
 </div>
 
-{{-- ═══════════════════════════════════════════
+{{-- 
     CHART.JS SCRIPTS
-═══════════════════════════════════════════ --}}
+ --}}
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>

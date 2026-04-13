@@ -104,9 +104,6 @@ class AspirasiController extends Controller
             ->with('success', 'Umpan balik berhasil disimpan.');
     }
 
-    /**
-     * Update hanya status aspirasi (quick action dari list).
-     */
     public function updateStatus(Request $request, InputAspirasi $aspirasi): RedirectResponse
     {
         $request->validate([
